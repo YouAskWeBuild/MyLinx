@@ -25,4 +25,4 @@ deploy:
   # Git branch on which it should deploy (master, gh-pages, foo...)
   target_branch: deployment
   on:
-    branch: deployment
+    branch: main
