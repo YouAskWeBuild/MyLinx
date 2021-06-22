@@ -3,12 +3,12 @@ node_js:
   - 14
 
 cache:
-  yarn: true
+  npm: true
   directories:
     - public
     - .cache
 script:
-  - yarn build
+  - npm run build
 
 # Here is the magic part
 deploy:
