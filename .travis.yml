@@ -6,7 +6,13 @@ cache:
   npm: true
   directories:
     - node_modules
+
+before_install:
+  - npm install -g codecov
+
 script:
+  - istanbul cover ./node_modules/jasmine/bin/jasmine.js
+  - codecov
   - npm run build
 
 # Here is the magic part
