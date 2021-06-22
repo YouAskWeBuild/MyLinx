@@ -11,7 +11,7 @@ before_install:
   - npm install -g codecov
 
 script:
-  - istanbul cover ./node_modules/jasmine/bin/jasmine.js
+  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
   - codecov
   - npm run build
 
