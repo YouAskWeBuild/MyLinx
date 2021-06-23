@@ -1,4 +1,6 @@
 # MyLinx
+## _A simple bio links tool for ***developers***_
+
 
 ![Travis (.com)](https://img.shields.io/travis/com/youaskwebuild/MyLinx?style=for-the-badge)
 ![Maintenance](https://img.shields.io/maintenance/yes/2021?style=for-the-badge)
@@ -14,3 +16,81 @@
 ![GitHub forks](https://img.shields.io/github/forks/youaskwebuild/MyLinx?style=for-the-badge)
 ![Website](https://img.shields.io/website?down_message=Offline&style=for-the-badge&up_message=Online&url=https%3A%2F%2Fyouaskwebuild.github.io%2FMyLinx%2F)
 ![Discord](https://img.shields.io/discord/854067244274155540?style=for-the-badge)
+
+
+
+
+MyLinx is an open source tool to create and host your bio links page in github. 
+
+Looking for a demo ? 
+
+[MyLinx Demo](https://youaskwebuild.github.io/MyLinx/)
+
+[MyLinx Builder Demo](https://youaskwebuild.github.io/MyLinx/builder.html)
+
+## Features
+
+- Add unlimited links
+- Search and filter 
+- Add Social media links
+- MyLinx Builder with live preview
+- Save & Load your data in builder
+
+## Built Using
+
+MyLinx uses the following open source projects:
+
+- [TailwindCSS] - Website is built using TailwindCSS!
+
+And of course [MyLinx](https://github.com/YouAskWeBuild/MyLinx) itself is open source with a Apache 2.0 license on GitHub.
+
+## Installation
+
+### To run locally
+
+MyLinx requires [Node.js](https://nodejs.org/) v14+ to run.
+
+Fork the repository [MyLinx](https://github.com/youaskwebuild/MyLinx/fork)
+
+Clone your forked repository
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+cd MyLinx
+npm install
+npm run start
+```
+
+For production environments...
+
+```sh
+npm install 
+npm run build
+```
+
+## Plugins
+
+MyLinx is currently extended with the following plugins.
+
+| Plugin | Usage |
+| ------ | ------ |
+|Tailwind Forms | Forms in MyLinx builder are built using tailwind forms plugin 
+
+## Development
+
+Want to contribute? Great!
+
+### Docs Coming soon! 
+
+
+
+## License
+
+Apache 2.0
+
+**Free Software, Hell Yeah!**
+
+
+   [TailwindCSS]: <https://github.com/tailwindlabs/tailwindcss>
+   [Tailwind Forms]: <https://github.com/tailwindlabs/tailwindcss-forms>
