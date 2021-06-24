@@ -44,15 +44,39 @@ MyLinx uses the following open source projects:
 
 And of course [MyLinx](https://github.com/YouAskWeBuild/MyLinx) itself is open source with a Apache 2.0 license on GitHub.
 
+
+## Do you need one like the Demo for yourself ? 
+
+Here is what you should do
+
+- Fork the repository [MyLinx](https://github.com/youaskwebuild/MyLinx/fork)
+- Go to Settings -> Pages -> Select **gh-pages** branch, **/root** in the next select folder and click on **Save**
+
+   ![Example](./how-to-use.png)
+- Your own site ([your-github-profile-name].github.io/MyLinx) will be up soon.
+
+- You can either visit ([your-github-profile-name].github.io/MyLinx/builder.html) or visit [MyLinx Builder](https://youaskwebuild.github.io/MyLinx/builder.html) to add your own links to display on Mylinx.
+
+- Once you are done, click on **Copy Data** button on the builder page. This will copy the links data to clipboard. 
+
+- Now go to your repository and switch your branch to gh-pages
+
+- Edit **data.json** and replace the content with the clipboard content that was copied.
+
+- That's it! Your website is now ready. You can add the link ([your-github-profile-name].github.io/MyLinx) now to your instragram bio or where ever you want.
+
+- In case you want to add or remove, you can click on **Load Data** button and paste the content of your data.json and begin editing from there.
+
+
+
+
 ## Installation
 
 ### To run locally
 
 MyLinx requires [Node.js](https://nodejs.org/) v14+ to run.
 
-Fork the repository [MyLinx](https://github.com/youaskwebuild/MyLinx/fork)
-
-Clone your forked repository
+Clone this repository
 
 Install the dependencies and devDependencies and start the server.
 
@@ -77,12 +101,15 @@ MyLinx is currently extended with the following plugins.
 | ------ | ------ |
 |Tailwind Forms | Forms in MyLinx builder are built using tailwind forms plugin 
 
-## Development
+## Contribute
 
 Want to contribute? Great!
 
-### Docs Coming soon! 
+Fork the repository [MyLinx](https://github.com/youaskwebuild/MyLinx/fork)
 
+Clone your forked repository
+ 
+Make the changes to your clone and provide a PR! 
 
 
 ## License
@@ -94,3 +121,8 @@ Apache 2.0
 
    [TailwindCSS]: <https://github.com/tailwindlabs/tailwindcss>
    [Tailwind Forms]: <https://github.com/tailwindlabs/tailwindcss-forms>
+
+
+## Authors
+
+> Balachandar Sureshkumar
