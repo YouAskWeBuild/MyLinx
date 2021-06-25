@@ -1,0 +1,85 @@
+{
+	"user": "5d32aba7-642a-4aea-9637-9f20713059c0",
+	"logo": "https://avatars.githubusercontent.com/u/85255520",
+	"title": "You Ask We Build",
+	"description": "Everything we build will be under open source license, free for anyone.",
+	"social": {
+		"facebook": "https://www.facebook.com/youaskwebuild",
+		"showfb": true,
+		"discord": "https://discord.gg/pn5Tw7cvek",
+		"showds": true,
+		"twitter": "https://www.twitter.com/youaskwebuildit",
+		"showtw": true,
+		"linkedin": "https://instagram.com/you_ask_we_build",
+		"showlin": true,
+		"instagram": "https://instagram.com/you_ask_we_build",
+		"showin": true,
+		"whatsapp": "",
+		"showwa": "",
+		"youtube": "https://www.youtube.com/channel/UCizK-lCnBXEcR29dZhyjNPA",
+		"showyt": true,
+		"github": "https://github.com/youaskwebuild",
+		"showgh": true
+	},
+	"search": "",
+	"category": "",
+	"views": 0,
+	"showmd": false,
+	"links": [{
+		"id": "20f70893-3df2-4170-afe4-9c37f3642e89",
+		"category": "Bio Links",
+		"title": "MyLinx",
+		"description": "A simple opensource bio links tool for developers",
+		"time": 1624563209,
+		"url": "https://github.com/YouAskWeBuild/MyLinx",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "1624394306",
+		"category": "Domain & Hosting",
+		"title": "Free Domains",
+		"description": "Register domains at zero cost. 100% free.",
+		"time": 1624394306,
+		"url": "https://www.freenom.com/",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "5e1aaf55-1dc8-4e6b-be27-fc93315ce110",
+		"category": "Background Removal",
+		"title": "Remove.bg",
+		"description": "",
+		"time": 1624394945,
+		"url": "https://www.remove.bg/",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "10d303a8-28ac-4df9-89cc-8e8c89ddc7a0",
+		"category": "Background Removal",
+		"title": "Social Book",
+		"description": "",
+		"time": 1624394977,
+		"url": "https://socialbook.io/",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "1bcf9361-3be8-4034-9aa4-8e9e7ea64ff5",
+		"category": "Background Removal",
+		"title": "Pure Photos",
+		"description": "",
+		"time": 1624395016,
+		"url": "https://purephotos.app/",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "e56081f9-4de7-4511-a7bc-3510f2adb452",
+		"category": "Background Removal",
+		"title": "Trace",
+		"description": "",
+		"time": 1624395036,
+		"url": "https://www.stickermule.com/trace/",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "4ae2c027-c0a1-4597-a355-8bf75540a6de",
+		"category": "Github",
+		"title": "Github Profile ",
+		"description": "README Generator",
+		"time": 1624395062,
+		"url": "https://rahuldkjain.github.io/gh-profile-readme-generator/",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}]
+}
