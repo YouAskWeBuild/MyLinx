@@ -61,7 +61,7 @@ Here is what you should do
 
 - Now go to your repository and switch your branch to gh-pages
 
-- Edit **data.json** and replace the content with the clipboard content that was copied.
+- Edit or Create a new file named **data.json** and replace the content with the clipboard content that was copied.
 
 - That's it! Your website is now ready. You can add the link ([your-github-profile-name].github.io/MyLinx) now to your instragram bio or where ever you want.
 
