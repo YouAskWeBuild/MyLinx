@@ -24,5 +24,7 @@ deploy:
   keep-history: true
   # Git branch on which it should deploy (master, gh-pages, foo...)
   target_branch: gh-pages
+  # overwrite exisitng files
+  overwrite: true
   on:
     branch: main
