@@ -1,591 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MYLINX</title>
-    <link rel="stylesheet" href="css/styles.css" />
-</head>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>MYLINX</title>
+        <link rel="stylesheet" href="css/styles.css"/>
+    </head>
 
-<body class="flex flex-row justify-center items-center" x-data="getData()" x-init="loadFromStorage()">
-    <div class="w-8/12 h-screen border-r border-gray-400 overflow-scroll">
-        <div class="antialiased text-gray-900 px-6">
-            <div class="max-w-xl mx-auto py-12 md:max-w-4xl">
-                <button class="float-right bg-red-500 px-4 py-2 mx-2 text-white font-bold" @click="clear">
-                    Clear
-                </button>
-                <button class="float-right bg-green-500 px-4 py-2 mx-2 text-white font-bold" @click="save">
-                    Save
-                </button>
-                <button class="float-right bg-green-500 px-4 py-2 mx-2 text-white font-bold" @click="copy">
-                    Copy Data
-                </button>
-                <button class="float-right bg-green-500 px-4 py-2 mx-2 text-white font-bold" @click="showldjson=true">
-                    Load Data
-                </button>
-                <div class="
-              fixed
-              z-50
-              flex flex-col
-              items-center
-              justify-center
-              w-1/2
-              gap-2
-              px-2
-              py-2
-              mx-auto
-              text-black
-              bg-white
-              rounded
-              shadow-lg
-              top-10
-            " x-show="showldjson" @click.away="showldjson=!showldjson" x-transition:enter="ease-out duration-300"
-                    x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                    x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-90">
-                    <div class="
-                flex
-                items-center
-                flex-col
-                w-full
-                p-1
-                bg-white
-                border border-gray-200
-                rounded
-                shadow-sm
-              ">
-                        <h2 class="text-2xl font-bold">Load - MyLinx JSON</h2>
-                        <label class="block">
-                            <span class="text-gray-700">Data.json Content</span>
-                            <textarea class="form-textarea mt-1 block w-full" rows="20" cols="100" :value="loadContent"
-                                placeholder="Paste your data.json contents here..." x-model="loadContent"></textarea>
-                        </label>
-                        <button class="
-                  float-right
-                  bg-green-500
-                  px-4
-                  mt-2
-                  py-2
-                  mx-2
-                  text-white
-                  font-bold
-                " @click="loadJSON">
-                            Load
-                        </button>
-                    </div>
-                </div>
-                <h2 class="text-2xl font-bold">Build - MyLinx</h2>
-                <p class="mt-2 text-lg text-gray-500">
-                    Made with
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline text-red-500 my-4" fill="currentColor"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z" />
-                    </svg>
-                    by <a href="https://youaskwebuild.tech">You Ask We Build</a>
-                </p>
-                <ul class="flex justify-center items-center my-4">
-                    <template x-for="(tab, index) in ['General', 'Social', 'Links']" :key="index">
-                        <li class="cursor-pointer py-2 px-4 text-gray-500 border-b-8"
-                            :class="activeTab===index ? 'text-green-500 border-green-500' : ''"
-                            @click="activeTab = index" x-text="tab"></li>
-                    </template>
-                </ul>
-                <div class="mt-8 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
-                    <div class="grid grid-cols-1 gap-6" x-show="activeTab===0">
-                        <label class="block">
-                            <span class="text-gray-700">Logo URL</span>
-                            <input type="text" class="form-input mt-1 block w-full" x-model="logo"
-                                placeholder="Logo URL" />
-                        </label>
-                        <label class="block">
-                            <span class="text-gray-700">Title</span>
-                            <input type="text" class="form-input mt-1 block w-full" x-model="title"
-                                placeholder="Title Text" />
-                        </label>
-                        <label class="block">
-                            <span class="text-gray-700">Description</span>
-                            <textarea class="form-textarea mt-1 block w-full h-24" rows="3"
-                                placeholder="Enter some long form content." x-model="description"></textarea>
-                        </label>
-                    </div>
-                    <div x-show="activeTab===1">
-                        <div class="grid grid-cols-1 gap-6">
-                            <div class="flex flex-row items-center justify-center">
-                                <label class="w-1/4">
-                                    <input class="form-checkbox" type="checkbox" :checked="showfb" x-model="showfb" />
-                                    <span class="ml-2">Enable Facebook</span>
-                                </label>
-                                <label class="w-3/4">
-                                    <span class="text-gray-700">Facebook</span>
-                                    <input type="text" class="form-input mt-1 block w-full" x-model="facebook"
-                                        placeholder="Facebook URL" />
-                                </label>
-                            </div>
-                            <div class="flex flex-row items-center justify-center">
-                                <label class="w-1/4">
-                                    <input class="form-checkbox" type="checkbox" :checked="showtw" x-model="showtw" />
-                                    <span class="ml-2">Enable Twitter</span>
-                                </label>
-                                <label class="w-3/4">
-                                    <span class="text-gray-700">Twitter</span>
-                                    <input type="text" class="form-input mt-1 block w-full" x-model="twitter"
-                                        placeholder="Twitter URL" />
-                                </label>
-                            </div>
-                            <div class="flex flex-row items-center justify-center">
-                                <label class="w-1/4">
-                                    <input class="form-checkbox" type="checkbox" :checked="showin" x-model="showin" />
-                                    <span class="ml-2">Enable Instagram</span>
-                                </label>
-                                <label class="w-3/4">
-                                    <span class="text-gray-700">Instagram</span>
-                                    <input type="text" class="form-input mt-1 block w-full" x-model="instagram"
-                                        placeholder="Instagram URL" />
-                                </label>
-                            </div>
-                            <div class="flex flex-row items-center justify-center">
-                                <label class="w-1/4">
-                                    <input class="form-checkbox" type="checkbox" :checked="showwa" x-model="showwa" />
-                                    <span class="ml-2">Enable Whatsapp</span>
-                                </label>
-                                <label class="w-3/4">
-                                    <span class="text-gray-700">Whatsapp</span>
-                                    <input type="text" class="form-input mt-1 block w-full" x-model="whatsapp"
-                                        placeholder="WhatsApp number with countrycode and no special characters" />
-                                </label>
-                            </div>
-                            <div class="flex flex-row items-center justify-center">
-                                <label class="w-1/4">
-                                    <input class="form-checkbox" type="checkbox" :checked="showlin" x-model="showlin" />
-                                    <span class="ml-2">Enable LinkedIn</span>
-                                </label>
-                                <label class="w-3/4">
-                                    <span class="text-gray-700">LinkedIn</span>
-                                    <input type="text" class="form-input mt-1 block w-full" x-model="linkedin"
-                                        placeholder="LinkedIn URL" />
-                                </label>
-                            </div>
-                            <div class="flex flex-row items-center justify-center">
-                                <label class="w-1/4">
-                                    <input class="form-checkbox" type="checkbox" :checked="showyt" x-model="showyt" />
-                                    <span class="ml-2">Enable Youtube</span>
-                                </label>
-                                <label class="w-3/4">
-                                    <span class="text-gray-700">Youtube</span>
-                                    <input type="text" class="form-input mt-1 block w-full" x-model="youtube"
-                                        placeholder="Youtube URL" />
-                                </label>
-                            </div>
-                            <div class="flex flex-row items-center justify-center">
-                                <label class="w-1/4">
-                                    <input class="form-checkbox" type="checkbox" :checked="showgh" x-model="showgh" />
-                                    <span class="ml-2">Enable Github</span>
-                                </label>
-                                <label class="w-3/4">
-                                    <span class="text-gray-700">Github</span>
-                                    <input type="text" class="form-input mt-1 block w-full" x-model="github"
-                                        placeholder="Github URL" />
-                                </label>
-                            </div>
-                            <div class="flex flex-row items-center justify-center">
-                                <label class="w-1/4">
-                                    <input class="form-checkbox" type="checkbox" :checked="showds" x-model="showds" />
-                                    <span class="ml-2">Enable Discord</span>
-                                </label>
-                                <label class="w-3/4">
-                                    <span class="text-gray-700">Discord</span>
-                                    <input type="text" class="form-input mt-1 block w-full" x-model="discord"
-                                        placeholder="Discord URL" />
-                                </label>
-                            </div>
+    <body class="flex flex-row justify-center items-center" x-data="getData()" x-init="loadFromStorage()">
+        <div class="w-8/12 h-screen border-r border-gray-400 overflow-scroll">
+            <div class="antialiased text-gray-900 px-6">
+                <div class="max-w-xl mx-auto py-12 md:max-w-4xl">
+                    <button class="float-right bg-red-500 px-4 py-2 mx-2 text-white font-bold" @click="clear">
+                        Clear
+                    </button>
+                    <button class="float-right bg-green-500 px-4 py-2 mx-2 text-white font-bold" @click="save(false)">
+                        Save
+                    </button>
+                    <button class="float-right bg-green-500 px-4 py-2 mx-2 text-white font-bold" @click="copy">
+                        Copy Data
+                    </button>
+                    <button class="float-right bg-green-500 px-4 py-2 mx-2 text-white font-bold" @click="showldjson=true">
+                        Load Data
+                    </button>
+                    <div class=" fixed z-50 flex flex-col items-center justify-center w-1/2 gap-2 px-2 py-2 mx-auto text-black bg-white rounded shadow-lg top-10 " x-show="showldjson" @click.away="showldjson=!showldjson" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+                        <div class=" flex  items-center  flex-col  w-full  p-1  bg-white  border border-gray-200  rounded  shadow-sm  ">
+                            <h2 class="text-2xl font-bold">Load - MyLinx JSON</h2>
+                            <label class="block">
+                                <span class="text-gray-700">Data.json Content</span>
+                                <textarea class="form-textarea mt-1 block w-full" rows="20" cols="100" :value="loadContent" placeholder="Paste your data.json contents here..." x-model="loadContent"></textarea>
+                            </label>
+                            <button class="float-right bg-green-500 px-4 mt-2 py-2 mx-2 text-white font-bold " @click="loadJSON">
+                                Load
+                            </button>
                         </div>
                     </div>
-                    <div x-show="activeTab===2">
-                        <button class="bg-blue-400 text-white px-3 py-5" @click="addLink">
-                            Add
-                        </button>
-                        <ul class="block w-11/12 my-4 mx-auto h-1/2 overflow-scroll">
-                            <template x-for=" (item,index) in filteredlinks" :key="item">
-                                <li class="flex align-center flex-col">
-                                    <div class="flex flex-row">
-                                        <button class="w-1/12 bg-red-400 text-white" @click="deleteLink(index)">
-                                            Delete
-                                        </button>
-                                        <h4 @click="selected !== index ? selected = index : selected = null"
-                                            x-text="index+1" class="
-                          w-11/12
-                          cursor-pointer
-                          px-5
-                          py-3
-                          bg-indigo-300
-                          text-white text-center
-                          inline-block
-                          hover:opacity-75 hover:shadow hover:-mb-3
-                          rounded-t
-                        "></h4>
-                                    </div>
-                                    <div x-show="selected == index" class="grid grid-cols-1 gap-6">
-                                        <label class="block">
-                                            <span class="text-gray-700">Image</span>
-                                            <input type="text" class="form-input mt-1 block w-full"
-                                                x-model="links[index].image" placeholder="URL" />
-                                        </label>
-                                        <label class="block">
-                                            <span class="text-gray-700">Category</span>
-                                            <input type="text" class="form-input mt-1 block w-full" maxlength="20"
-                                                x-model="links[index].category" placeholder="Category" />
-                                        </label>
-                                        <label class="block">
-                                            <span class="text-gray-700">Title</span>
-                                            <input type="text" class="form-input mt-1 block w-full"
-                                                x-model="links[index].title" placeholder="Title" />
-                                        </label>
-                                        <label class="block">
-                                            <span class="text-gray-700">Description</span>
-                                            <textarea class="form-textarea mt-1 block w-full h-24" rows="3"
-                                                placeholder="Enter some long form content."
-                                                x-model="links[index].description"></textarea>
-                                        </label>
-                                        <label class="block">
-                                            <span class="text-gray-700">Link URL</span>
-                                            <input type="text" class="form-input mt-1 block w-full"
-                                                x-model="links[index].url" placeholder="Link URL" />
-                                        </label>
-                                    </div>
-                                </li>
-                            </template>
-                        </ul>
+                    <div x-show="isNotificationShow" class="absolute top-0 right-0 m-3 w-2/3 md:w-1/3" x-transition:enter="transition transform ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition transform ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1">
+                        <div class="bg-white border-gray-300 border p-3 flex items-start shadow-lg rounded-md space-x-2">
+                            <svg class="flex-shrink-0 h-6 w-6 text-green-400" stroke="currentColor" viewbox="0 0 20 20">
+                                <path stroke-width="1" d="M10.219,1.688c-4.471,0-8.094,3.623-8.094,8.094s3.623,8.094,8.094,8.094s8.094-3.623,8.094-8.094S14.689,1.688,10.219,1.688 M10.219,17.022c-3.994,0-7.242-3.247-7.242-7.241c0-3.994,3.248-7.242,7.242-7.242c3.994,0,7.241,3.248,7.241,7.242C17.46,13.775,14.213,17.022,10.219,17.022 M15.099,7.03c-0.167-0.167-0.438-0.167-0.604,0.002L9.062,12.48l-2.269-2.277c-0.166-0.167-0.437-0.167-0.603,0c-0.166,0.166-0.168,0.437-0.002,0.603l2.573,2.578c0.079,0.08,0.188,0.125,0.3,0.125s0.222-0.045,0.303-0.125l5.736-5.751C15.268,7.466,15.265,7.196,15.099,7.03"></path>
+                            </svg>
+                            <div class="flex-1 space-y-1">
+                                <p class="text-base leading-6 font-medium text-gray-700" x-text="notificationContent"> </p>
+                                
+                            </div>
+                            <svg class="flex-shrink-0 h-5 w-5 text-gray-400 cursor-pointer" x-on:click="isNotificationShow = false" stroke="currentColor" viewbox="0 0 20 20">
+                                <path stroke-width="1.2" d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="text-2xl font-bold">Build - MyLinx</h2>
+                    <p class="mt-2 text-lg text-gray-500">
+                        Made with
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline text-red-500 my-4" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"/>
+                        </svg>
+                        by
+                        <a href="https://youaskwebuild.tech">You Ask We Build</a>
+                    </p>
+                    <ul class="flex justify-center items-center my-4">
+                        <template x-for="(tab, index) in ['General', 'Social', 'Links']" :key="index">
+                            <li class="cursor-pointer py-2 px-4 text-gray-500 border-b-8" :class="activeTab===index ? 'text-green-500 border-green-500' : ''" @click="activeTab = index" x-text="tab"></li>
+                        </template>
+                    </ul>
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
+                        <div class="grid grid-cols-1 gap-6" x-show="activeTab===0">
+                            <label class="block">
+                                <span class="text-gray-700">Logo URL</span>
+                                <input type="text" class="form-input mt-1 block w-full" x-model="logo" placeholder="Logo URL"/>
+                            </label>
+                            <label class="block">
+                                <span class="text-gray-700">Title</span>
+                                <input type="text" class="form-input mt-1 block w-full" x-model="title" placeholder="Title Text"/>
+                            </label>
+                            <label class="block">
+                                <span class="text-gray-700">Description</span>
+                                <textarea class="form-textarea mt-1 block w-full h-24" rows="3" placeholder="Enter some long form content." x-model="description"></textarea>
+                            </label>
+                        </div>
+                        <div x-show="activeTab===1">
+                            <div class="grid grid-cols-1 gap-6">
+                                <div class="flex flex-row items-center justify-center">
+                                    <label class="w-1/4">
+                                        <input class="form-checkbox" type="checkbox" :checked="showfb" x-model="showfb"/>
+                                        <span class="ml-2">Enable Facebook</span>
+                                    </label>
+                                    <label class="w-3/4">
+                                        <span class="text-gray-700">Facebook</span>
+                                        <input type="text" class="form-input mt-1 block w-full" x-model="facebook" placeholder="Facebook URL"/>
+                                    </label>
+                                </div>
+                                <div class="flex flex-row items-center justify-center">
+                                    <label class="w-1/4">
+                                        <input class="form-checkbox" type="checkbox" :checked="showtw" x-model="showtw"/>
+                                        <span class="ml-2">Enable Twitter</span>
+                                    </label>
+                                    <label class="w-3/4">
+                                        <span class="text-gray-700">Twitter</span>
+                                        <input type="text" class="form-input mt-1 block w-full" x-model="twitter" placeholder="Twitter URL"/>
+                                    </label>
+                                </div>
+                                <div class="flex flex-row items-center justify-center">
+                                    <label class="w-1/4">
+                                        <input class="form-checkbox" type="checkbox" :checked="showin" x-model="showin"/>
+                                        <span class="ml-2">Enable Instagram</span>
+                                    </label>
+                                    <label class="w-3/4">
+                                        <span class="text-gray-700">Instagram</span>
+                                        <input type="text" class="form-input mt-1 block w-full" x-model="instagram" placeholder="Instagram URL"/>
+                                    </label>
+                                </div>
+                                <div class="flex flex-row items-center justify-center">
+                                    <label class="w-1/4">
+                                        <input class="form-checkbox" type="checkbox" :checked="showwa" x-model="showwa"/>
+                                        <span class="ml-2">Enable Whatsapp</span>
+                                    </label>
+                                    <label class="w-3/4">
+                                        <span class="text-gray-700">Whatsapp</span>
+                                        <input type="text" class="form-input mt-1 block w-full" x-model="whatsapp" placeholder="WhatsApp number with countrycode and no special characters"/>
+                                    </label>
+                                </div>
+                                <div class="flex flex-row items-center justify-center">
+                                    <label class="w-1/4">
+                                        <input class="form-checkbox" type="checkbox" :checked="showlin" x-model="showlin"/>
+                                        <span class="ml-2">Enable LinkedIn</span>
+                                    </label>
+                                    <label class="w-3/4">
+                                        <span class="text-gray-700">LinkedIn</span>
+                                        <input type="text" class="form-input mt-1 block w-full" x-model="linkedin" placeholder="LinkedIn URL"/>
+                                    </label>
+                                </div>
+                                <div class="flex flex-row items-center justify-center">
+                                    <label class="w-1/4">
+                                        <input class="form-checkbox" type="checkbox" :checked="showyt" x-model="showyt"/>
+                                        <span class="ml-2">Enable Youtube</span>
+                                    </label>
+                                    <label class="w-3/4">
+                                        <span class="text-gray-700">Youtube</span>
+                                        <input type="text" class="form-input mt-1 block w-full" x-model="youtube" placeholder="Youtube URL"/>
+                                    </label>
+                                </div>
+                                <div class="flex flex-row items-center justify-center">
+                                    <label class="w-1/4">
+                                        <input class="form-checkbox" type="checkbox" :checked="showgh" x-model="showgh"/>
+                                        <span class="ml-2">Enable Github</span>
+                                    </label>
+                                    <label class="w-3/4">
+                                        <span class="text-gray-700">Github</span>
+                                        <input type="text" class="form-input mt-1 block w-full" x-model="github" placeholder="Github URL"/>
+                                    </label>
+                                </div>
+                                <div class="flex flex-row items-center justify-center">
+                                    <label class="w-1/4">
+                                        <input class="form-checkbox" type="checkbox" :checked="showds" x-model="showds"/>
+                                        <span class="ml-2">Enable Discord</span>
+                                    </label>
+                                    <label class="w-3/4">
+                                        <span class="text-gray-700">Discord</span>
+                                        <input type="text" class="form-input mt-1 block w-full" x-model="discord" placeholder="Discord URL"/>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div x-show="activeTab===2">
+                            <button class="bg-blue-400 text-white px-3 py-5" @click="addLink">
+                                Add
+                            </button>
+                            <ul class="block w-11/12 my-4 mx-auto h-1/2 overflow-scroll">
+                                <template x-for=" (item,index) in filteredlinks" :key="item">
+                                    <li class="flex align-center flex-col">
+                                        <div class="flex flex-row">
+                                            <button class="w-1/12 bg-red-400 text-white" @click="deleteLink(index)">
+                                                Delete
+                                            </button>
+                                            <h4 @click="selected !== index ? selected = index : selected = null" x-text="index+1" class=" w-11/12 cursor-pointer px-5 py-3 bg-indigo-300 text-white text-center inline-block hover:opacity-75 hover:shadow hover:-mb-3 rounded-t"></h4>
+                                        </div>
+                                        <div x-show="selected == index" class="grid grid-cols-1 gap-6">
+                                            <label class="block">
+                                                <span class="text-gray-700">Image</span>
+                                                <input type="text" class="form-input mt-1 block w-full" x-model="links[index].image" placeholder="URL"/>
+                                            </label>
+                                            <label class="block">
+                                                <span class="text-gray-700">Category</span>
+                                                <input type="text" class="form-input mt-1 block w-full" maxlength="20" x-model="links[index].category" placeholder="Category"/>
+                                            </label>
+                                            <label class="block">
+                                                <span class="text-gray-700">Title</span>
+                                                <input type="text" class="form-input mt-1 block w-full" x-model="links[index].title" placeholder="Title"/>
+                                            </label>
+                                            <label class="block">
+                                                <span class="text-gray-700">Description</span>
+                                                <textarea class="form-textarea mt-1 block w-full h-24" rows="3" placeholder="Enter some long form content." x-model="links[index].description"></textarea>
+                                            </label>
+                                            <label class="block">
+                                                <span class="text-gray-700">Link URL</span>
+                                                <input type="text" class="form-input mt-1 block w-full" x-model="links[index].url" placeholder="Link URL"/>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="w-4/12 h-screen overflow-hidden flex items-center justify-center">
-        <section style="
-          height: 750px;
-          width: 450px;
-          border: 16px black solid;
-          border-top-width: 60px;
-          border-bottom-width: 60px;
-          border-radius: 36px;
-        " class="
-          border-black
-          max-w-screen-sm
-          font-sans
-          overflow-scroll
-          bg-gradient-to-b
-          from-red-300
-          to-pink-300
-          bg-no-repeat
-        ">
-            <section class="h-full w-full flex flex-col justify-start items-center">
-                <div class="w-2/6 my-2">
-                    <img class="rounded-full object-contain" :src="`${logo}`" alt="logo" />
-                </div>
-                <div class="w-5/6 text-white text-2xl font-bold my-2 text-center">
-                    <h2 class="break-words" x-text="title"></h2>
-                </div>
-                <div class="w-5/6 text-center my-2 text-white text-xl font-semibold">
-                    <p class="text-center break-words" x-text="description"></p>
-                </div>
-                <div class="grid m-2 gap-y-2 grid-cols-1 w-4/5">
-                    <template x-for=" item in filteredlinks" :key="item">
-                        <div class="flex flex-col cursor-pointer" @click="action(item.url, user, item.id)">
-                            <div class="bg-white shadow-md rounded-3xl p-4">
-                                <div class="flex flex-col">
-                                    <div class="flex flex-row gap-4">
-                                        <template x-if="item.image">
-                                            <div class="
-                            h-full
-                            w-1/6
-                            my-auto
-                            flex flex-col
-                            gap-2
-                            justify-center
-                            items-center
-                          ">
-                                                <img :src="`${item.image}`" :alt="`${item.title}`"
-                                                    class="object-cover w-full rounded-2xl" />
-                                            </div>
-                                        </template>
-                                        <div class="w-5/6 justify-evenly">
-                                            <div class="flex flex-col flex-wrap">
-                                                <div class="flex flex-row">
-                                                    <div class="
-                                w-10/12
-                                overflow-hidden
-                                truncate
-                                text-sm text-blue-700
-                                font-bold
-                              " x-text="item.category"></div>
-                                                    <div class="
-                                w-2/12
-                                h-1/12
-                                inline-flex
-                                flex-row-reverse
-                                gap-2
-                              ">
-                                                        <div class="flex items-center">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="h-4 w-4 mr-1 text-red-500" fill="currentColor"
-                                                                viewBox="0 0 24 24">
-                                                                <path
-                                                                    d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z" />
-                                                            </svg>
-                                                            <p class="text-sm" x-text="item.click"></p>
+        <div class="w-4/12 h-screen overflow-hidden flex items-center justify-center">
+            <section style="height: 750px; width: 450px; border: 16px black solid; border-top-width: 60px; border-bottom-width: 60px; border-radius: 36px;" class=" border-black max-w-screen-sm font-sans overflow-scroll bg-gradient-to-b from-red-300 to-pink-300 bg-no-repeat">
+                <section class="h-full w-full flex flex-col justify-start items-center">
+                    <div class="w-2/6 my-2">
+                        <img class="rounded-full object-contain" :src="`${logo}`" alt="logo"/>
+                    </div>
+                    <div class="w-5/6 text-white text-2xl font-bold my-2 text-center">
+                        <h2 class="break-words" x-text="title"></h2>
+                    </div>
+                    <div class="w-5/6 text-center my-2 text-white text-xl font-semibold">
+                        <p class="text-center break-words" x-text="description"></p>
+                    </div>
+                    <div class="grid m-2 gap-y-2 grid-cols-1 w-4/5">
+                        <template x-for=" item in filteredlinks" :key="item">
+                            <div class="flex flex-col cursor-pointer" @click="action(item.url, user, item.id)">
+                                <div class="bg-white shadow-md rounded-3xl p-4">
+                                    <div class="flex flex-col">
+                                        <div class="flex flex-row gap-4">
+                                            <template x-if="item.image">
+                                                <div class="h-full w-1/6 my-auto flex flex-col gap-2 justify-center items-center">
+                                                    <img :src="`${item.image}`" :alt="`${item.title}`" class="object-cover w-full rounded-2xl"/>
+                                                </div>
+                                            </template>
+                                            <div class="w-5/6 justify-evenly">
+                                                <div class="flex flex-col flex-wrap">
+                                                    <div class="flex flex-row">
+                                                        <div class="w-10/12 overflow-hidden truncate text-sm text-blue-700 font-bold" x-text="item.category"></div>
+                                                        <div class=" w-2/12 h-1/12 inline-flex flex-row-reverse gap-2">
+                                                            <div class="flex items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-red-500" fill="currentColor" viewbox="0 0 24 24">
+                                                                    <path d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"/>
+                                                                </svg>
+                                                                <p class="text-sm" x-text="item.click"></p>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <h2 class="flex text-lg font-semibold break-words truncate w-full overflow-hidden" x-text="item.title"></h2>
+                                                    <span class="w-full text-sm break-words" x-text="item.description"></span>
                                                 </div>
-                                                <h2 class="
-                              flex
-                              text-lg
-                              font-semibold
-                              break-words
-                              truncate
-                              w-full
-                              overflow-hidden
-                            " x-text="item.title"></h2>
-                                                <span class="w-full text-sm break-words" x-text="item.description">
-                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </template>
-                </div>
-                <span class="
-              text-sm text-center
-              w-4/5
-              text-black
-              bg-white
-              p-2
-              rounded-md
-              mt-4
-            ">Viewed by : <span x-text="views"></span></span>
-                <span class="text-lg text-center w-4/5 text-white mt-4">Follow us</span>
-                <div class="
-              w-4/5
-              grid grid-flow-row grid-cols-4 grid-rows-2
-              justify-center
-              items-center
-              text-white text-xl
-              mt-2
-              mb-1
-              gap-3
-            ">
-                    <a :href="facebook" target="_blank" x-show="showfb" class="hover:text-blue-600">
-                        <div class="flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-3 7h-1.924c-.615 0-1.076.252-1.076.889v1.111h3l-.238 3h-2.762v8h-3v-8h-2v-3h2v-1.923c0-2.022 1.064-3.077 3.461-3.077h2.539v3z" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a :href="youtube" target="_blank" x-show="showyt" class="hover:text-red-600">
-                        <div class="flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M9.279 13.52h-.939v5.027h-.908v-5.027h-.94v-.854h2.788v.854zm5.395 1.721v2.406c0 .537-.2.954-.736.954-.296 0-.541-.108-.767-.388v.333h-.813v-5.88h.813v1.893c.183-.222.429-.405.718-.405.59 0 .785.499.785 1.087zm-.83.049c0-.146-.027-.257-.086-.333-.098-.129-.279-.143-.42-.071l-.167.132v2.703l.19.153c.132.066.324.071.413-.045.046-.061.069-.161.069-.299v-2.24zm-2.347-5.859c.229 0 .354-.183.354-.431v-2.119c0-.255-.111-.434-.371-.434-.237 0-.353.185-.353.434v2.119c.001.24.137.431.37.431zm-.733 8.07c-.099.123-.317.325-.475.325-.172 0-.215-.118-.215-.292v-3.325h-.805v3.626c0 .88.597.885 1.031.636.16-.092.315-.227.464-.403v.479h.807v-4.338h-.807v3.292zm13.236-12.501v14c0 2.761-2.238 5-5 5h-14c-2.761 0-5-2.239-5-5v-14c0-2.761 2.239-5 5-5h14c2.762 0 5 2.239 5 5zm-10.566 4.427c0 .45.137.813.592.813.256 0 .611-.133.979-.569v.503h.847v-4.554h-.847v3.457c-.104.129-.333.341-.498.341-.182 0-.226-.124-.226-.307v-3.491h-.847v3.807zm-3.177-2.621v2.233c0 .803.419 1.22 1.24 1.22.682 0 1.218-.456 1.218-1.22v-2.233c0-.713-.531-1.224-1.218-1.224-.745 0-1.24.493-1.24 1.224zm-3.155-2.806l1.135 3.67v2.504h.953v-2.504l1.11-3.67h-.969l-.611 2.468-.658-2.468h-.96zm11.564 11.667c-.014-2.978-.232-4.116-2.111-4.245-1.734-.118-7.377-.118-9.109 0-1.876.128-2.098 1.262-2.111 4.245.014 2.978.233 4.117 2.111 4.245 1.732.118 7.375.118 9.109 0 1.877-.129 2.097-1.262 2.111-4.245zm-1.011-.292v1.104h-1.542v.818c0 .325.027.607.352.607.34 0 .36-.229.36-.607v-.301h.83v.326c0 .836-.358 1.342-1.208 1.342-.771 0-1.164-.561-1.164-1.342v-1.947c0-.753.497-1.275 1.225-1.275.773-.001 1.147.491 1.147 1.275zm-.83-.008c0-.293-.062-.508-.353-.508-.299 0-.359.21-.359.508v.439h.712v-.439z" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a :href="discord" target="_blank" x-show="showds" class="hover:text-blue-600">
-                        <div class="flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24"
-                                fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
-                                <path
-                                    d="M19 24h-14c-2.761 0-5-2.239-5-5v-14c0-2.761 2.239-5 5-5h14c2.762 0 5 2.239 5 5v14c0 2.761-2.238 5-5 5zm-3.288-4.888l-.424-1.48 1.024.952.968.896 1.72 1.52v-14.352c0-.912-.736-1.648-1.64-1.648h-10.72c-.904 0-1.64.736-1.64 1.648v10.816c0 .912.736 1.648 1.64 1.648h9.072zm-1.44-3.664c1.768-.056 2.448-1.216 2.448-1.216 0-2.576-1.152-4.664-1.152-4.664-1.152-.864-2.248-.84-2.248-.84l-.112.128c1.36.416 1.992 1.016 1.992 1.016-.832-.456-1.648-.68-2.408-.768-.576-.064-1.128-.048-1.616.016l-.136.016c-.28.024-.96.128-1.816.504l-.472.232s.664-.632 2.104-1.048l-.08-.096s-1.096-.024-2.248.84c0 0-1.152 2.088-1.152 4.664 0 0 .672 1.16 2.44 1.216l.536-.664c-1.016-.304-1.4-.944-1.4-.944l.224.136.032.024.032.018.009.004.031.018c.2.112.4.2.584.272.328.128.72.256 1.176.344.6.112 1.304.152 2.072.008.376-.064.76-.176 1.16-.344.28-.104.592-.256.92-.472 0 0-.4.656-1.448.952l.528.648zm-3.72-3.736c-.456 0-.816.4-.816.888s.368.888.816.888c.456 0 .816-.4.816-.888.008-.488-.36-.888-.816-.888zm2.92 0c-.456 0-.816.4-.816.888s.368.888.816.888c.456 0 .816-.4.816-.888s-.36-.888-.816-.888z" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a :href="instagram" target="_blank" x-show="showin" class="hover:text-pink-600">
-                        <div class="flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M15.233 5.488c-.843-.038-1.097-.046-3.233-.046s-2.389.008-3.232.046c-2.17.099-3.181 1.127-3.279 3.279-.039.844-.048 1.097-.048 3.233s.009 2.389.047 3.233c.099 2.148 1.106 3.18 3.279 3.279.843.038 1.097.047 3.233.047 2.137 0 2.39-.008 3.233-.046 2.17-.099 3.18-1.129 3.279-3.279.038-.844.046-1.097.046-3.233s-.008-2.389-.046-3.232c-.099-2.153-1.111-3.182-3.279-3.281zm-3.233 10.62c-2.269 0-4.108-1.839-4.108-4.108 0-2.269 1.84-4.108 4.108-4.108s4.108 1.839 4.108 4.108c0 2.269-1.839 4.108-4.108 4.108zm4.271-7.418c-.53 0-.96-.43-.96-.96s.43-.96.96-.96.96.43.96.96-.43.96-.96.96zm-1.604 3.31c0 1.473-1.194 2.667-2.667 2.667s-2.667-1.194-2.667-2.667c0-1.473 1.194-2.667 2.667-2.667s2.667 1.194 2.667 2.667zm4.333-12h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm.952 15.298c-.132 2.909-1.751 4.521-4.653 4.654-.854.039-1.126.048-3.299.048s-2.444-.009-3.298-.048c-2.908-.133-4.52-1.748-4.654-4.654-.039-.853-.048-1.125-.048-3.298 0-2.172.009-2.445.048-3.298.134-2.908 1.748-4.521 4.654-4.653.854-.04 1.125-.049 3.298-.049s2.445.009 3.299.048c2.908.133 4.523 1.751 4.653 4.653.039.854.048 1.127.048 3.299 0 2.173-.009 2.445-.048 3.298z" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a :href="whatsapp" target="_blank" x-show="showwa" class="hover:text-green-600">
-                        <div class="flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M12.036 5.339c-3.635 0-6.591 2.956-6.593 6.589-.001 1.483.434 2.594 1.164 3.756l-.666 2.432 2.494-.654c1.117.663 2.184 1.061 3.595 1.061 3.632 0 6.591-2.956 6.592-6.59.003-3.641-2.942-6.593-6.586-6.594zm3.876 9.423c-.165.463-.957.885-1.337.942-.341.051-.773.072-1.248-.078-.288-.091-.657-.213-1.129-.417-1.987-.858-3.285-2.859-3.384-2.991-.099-.132-.809-1.074-.809-2.049 0-.975.512-1.454.693-1.653.182-.2.396-.25.528-.25l.38.007c.122.006.285-.046.446.34.165.397.561 1.372.611 1.471.049.099.083.215.016.347-.066.132-.099.215-.198.33l-.297.347c-.099.099-.202.206-.087.404.116.198.513.847 1.102 1.372.757.675 1.395.884 1.593.983.198.099.314.083.429-.05.116-.132.495-.578.627-.777s.264-.165.446-.099 1.156.545 1.354.645c.198.099.33.149.38.231.049.085.049.482-.116.945zm3.088-14.762h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-6.967 19.862c-1.327 0-2.634-.333-3.792-.965l-4.203 1.103 1.125-4.108c-.694-1.202-1.059-2.566-1.058-3.964.002-4.372 3.558-7.928 7.928-7.928 2.121.001 4.112.827 5.609 2.325s2.321 3.491 2.32 5.609c-.002 4.372-3.559 7.928-7.929 7.928z" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a :href="twitter" target="_blank" x-show="showtw" class="hover:text-blue-300">
-                        <div class="flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a :href="twitter" target="_blank" x-show="showlin" class="hover:text-blue-800">
-                        <div class="flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                            </svg>
-                        </div>
-                    </a>
-                    <a :href="github" target="_blank" x-show="showgh" class="hover:text-black">
-                        <div class="flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-4.466 19.59c-.405.078-.534-.171-.534-.384v-2.195c0-.747-.262-1.233-.55-1.481 1.782-.198 3.654-.875 3.654-3.947 0-.874-.312-1.588-.823-2.147.082-.202.356-1.016-.079-2.117 0 0-.671-.215-2.198.82-.64-.18-1.324-.267-2.004-.271-.68.003-1.364.091-2.003.269-1.528-1.035-2.2-.82-2.2-.82-.434 1.102-.16 1.915-.077 2.118-.512.56-.824 1.273-.824 2.147 0 3.064 1.867 3.751 3.645 3.954-.229.2-.436.552-.508 1.07-.457.204-1.614.557-2.328-.666 0 0-.423-.768-1.227-.825 0 0-.78-.01-.055.487 0 0 .525.246.889 1.17 0 0 .463 1.428 2.688.944v1.489c0 .211-.129.459-.528.385-3.18-1.057-5.472-4.056-5.472-7.59 0-4.419 3.582-8 8-8s8 3.581 8 8c0 3.533-2.289 6.531-5.466 7.59z" />
-                            </svg>
-                        </div>
-                    </a>
-                </div>
-                <div class="font-medium text-lg w-full text-white text-center my-4">
-                    Made with
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline text-red-500 my-4" fill="currentColor"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z" />
-                    </svg>
-                    by <a href="https://youaskwebuild.tech">You Ask We Build</a>
-                </div>
+                        </template>
+                    </div>
+                    <span class="text-sm text-center w-4/5 text-black bg-white p-2 rounded-md mt-4">Viewed by :
+                        <span x-text="views"></span>
+                    </span>
+                    <span class="text-lg text-center w-4/5 text-white mt-4">Follow us</span>
+                    <div class="w-4/5 grid grid-flow-row grid-cols-4 grid-rows-2 justify-center items-center text-white text-xl mt-2 mb-1 gap-3">
+                        <a :href="facebook" target="_blank" x-show="showfb" class="hover:text-blue-600">
+                            <div class="flex justify-center items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor" viewbox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-3 7h-1.924c-.615 0-1.076.252-1.076.889v1.111h3l-.238 3h-2.762v8h-3v-8h-2v-3h2v-1.923c0-2.022 1.064-3.077 3.461-3.077h2.539v3z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <a :href="youtube" target="_blank" x-show="showyt" class="hover:text-red-600">
+                            <div class="flex justify-center items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor" viewbox="0 0 24 24">
+                                    <path d="M9.279 13.52h-.939v5.027h-.908v-5.027h-.94v-.854h2.788v.854zm5.395 1.721v2.406c0 .537-.2.954-.736.954-.296 0-.541-.108-.767-.388v.333h-.813v-5.88h.813v1.893c.183-.222.429-.405.718-.405.59 0 .785.499.785 1.087zm-.83.049c0-.146-.027-.257-.086-.333-.098-.129-.279-.143-.42-.071l-.167.132v2.703l.19.153c.132.066.324.071.413-.045.046-.061.069-.161.069-.299v-2.24zm-2.347-5.859c.229 0 .354-.183.354-.431v-2.119c0-.255-.111-.434-.371-.434-.237 0-.353.185-.353.434v2.119c.001.24.137.431.37.431zm-.733 8.07c-.099.123-.317.325-.475.325-.172 0-.215-.118-.215-.292v-3.325h-.805v3.626c0 .88.597.885 1.031.636.16-.092.315-.227.464-.403v.479h.807v-4.338h-.807v3.292zm13.236-12.501v14c0 2.761-2.238 5-5 5h-14c-2.761 0-5-2.239-5-5v-14c0-2.761 2.239-5 5-5h14c2.762 0 5 2.239 5 5zm-10.566 4.427c0 .45.137.813.592.813.256 0 .611-.133.979-.569v.503h.847v-4.554h-.847v3.457c-.104.129-.333.341-.498.341-.182 0-.226-.124-.226-.307v-3.491h-.847v3.807zm-3.177-2.621v2.233c0 .803.419 1.22 1.24 1.22.682 0 1.218-.456 1.218-1.22v-2.233c0-.713-.531-1.224-1.218-1.224-.745 0-1.24.493-1.24 1.224zm-3.155-2.806l1.135 3.67v2.504h.953v-2.504l1.11-3.67h-.969l-.611 2.468-.658-2.468h-.96zm11.564 11.667c-.014-2.978-.232-4.116-2.111-4.245-1.734-.118-7.377-.118-9.109 0-1.876.128-2.098 1.262-2.111 4.245.014 2.978.233 4.117 2.111 4.245 1.732.118 7.375.118 9.109 0 1.877-.129 2.097-1.262 2.111-4.245zm-1.011-.292v1.104h-1.542v.818c0 .325.027.607.352.607.34 0 .36-.229.36-.607v-.301h.83v.326c0 .836-.358 1.342-1.208 1.342-.771 0-1.164-.561-1.164-1.342v-1.947c0-.753.497-1.275 1.225-1.275.773-.001 1.147.491 1.147 1.275zm-.83-.008c0-.293-.062-.508-.353-.508-.299 0-.359.21-.359.508v.439h.712v-.439z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <a :href="discord" target="_blank" x-show="showds" class="hover:text-blue-600">
+                            <div class="flex justify-center items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewbox="0 0 24 24" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
+                                    <path d="M19 24h-14c-2.761 0-5-2.239-5-5v-14c0-2.761 2.239-5 5-5h14c2.762 0 5 2.239 5 5v14c0 2.761-2.238 5-5 5zm-3.288-4.888l-.424-1.48 1.024.952.968.896 1.72 1.52v-14.352c0-.912-.736-1.648-1.64-1.648h-10.72c-.904 0-1.64.736-1.64 1.648v10.816c0 .912.736 1.648 1.64 1.648h9.072zm-1.44-3.664c1.768-.056 2.448-1.216 2.448-1.216 0-2.576-1.152-4.664-1.152-4.664-1.152-.864-2.248-.84-2.248-.84l-.112.128c1.36.416 1.992 1.016 1.992 1.016-.832-.456-1.648-.68-2.408-.768-.576-.064-1.128-.048-1.616.016l-.136.016c-.28.024-.96.128-1.816.504l-.472.232s.664-.632 2.104-1.048l-.08-.096s-1.096-.024-2.248.84c0 0-1.152 2.088-1.152 4.664 0 0 .672 1.16 2.44 1.216l.536-.664c-1.016-.304-1.4-.944-1.4-.944l.224.136.032.024.032.018.009.004.031.018c.2.112.4.2.584.272.328.128.72.256 1.176.344.6.112 1.304.152 2.072.008.376-.064.76-.176 1.16-.344.28-.104.592-.256.92-.472 0 0-.4.656-1.448.952l.528.648zm-3.72-3.736c-.456 0-.816.4-.816.888s.368.888.816.888c.456 0 .816-.4.816-.888.008-.488-.36-.888-.816-.888zm2.92 0c-.456 0-.816.4-.816.888s.368.888.816.888c.456 0 .816-.4.816-.888s-.36-.888-.816-.888z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <a :href="instagram" target="_blank" x-show="showin" class="hover:text-pink-600">
+                            <div class="flex justify-center items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor" viewbox="0 0 24 24">
+                                    <path d="M15.233 5.488c-.843-.038-1.097-.046-3.233-.046s-2.389.008-3.232.046c-2.17.099-3.181 1.127-3.279 3.279-.039.844-.048 1.097-.048 3.233s.009 2.389.047 3.233c.099 2.148 1.106 3.18 3.279 3.279.843.038 1.097.047 3.233.047 2.137 0 2.39-.008 3.233-.046 2.17-.099 3.18-1.129 3.279-3.279.038-.844.046-1.097.046-3.233s-.008-2.389-.046-3.232c-.099-2.153-1.111-3.182-3.279-3.281zm-3.233 10.62c-2.269 0-4.108-1.839-4.108-4.108 0-2.269 1.84-4.108 4.108-4.108s4.108 1.839 4.108 4.108c0 2.269-1.839 4.108-4.108 4.108zm4.271-7.418c-.53 0-.96-.43-.96-.96s.43-.96.96-.96.96.43.96.96-.43.96-.96.96zm-1.604 3.31c0 1.473-1.194 2.667-2.667 2.667s-2.667-1.194-2.667-2.667c0-1.473 1.194-2.667 2.667-2.667s2.667 1.194 2.667 2.667zm4.333-12h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm.952 15.298c-.132 2.909-1.751 4.521-4.653 4.654-.854.039-1.126.048-3.299.048s-2.444-.009-3.298-.048c-2.908-.133-4.52-1.748-4.654-4.654-.039-.853-.048-1.125-.048-3.298 0-2.172.009-2.445.048-3.298.134-2.908 1.748-4.521 4.654-4.653.854-.04 1.125-.049 3.298-.049s2.445.009 3.299.048c2.908.133 4.523 1.751 4.653 4.653.039.854.048 1.127.048 3.299 0 2.173-.009 2.445-.048 3.298z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <a :href="whatsapp" target="_blank" x-show="showwa" class="hover:text-green-600">
+                            <div class="flex justify-center items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor" viewbox="0 0 24 24">
+                                    <path d="M12.036 5.339c-3.635 0-6.591 2.956-6.593 6.589-.001 1.483.434 2.594 1.164 3.756l-.666 2.432 2.494-.654c1.117.663 2.184 1.061 3.595 1.061 3.632 0 6.591-2.956 6.592-6.59.003-3.641-2.942-6.593-6.586-6.594zm3.876 9.423c-.165.463-.957.885-1.337.942-.341.051-.773.072-1.248-.078-.288-.091-.657-.213-1.129-.417-1.987-.858-3.285-2.859-3.384-2.991-.099-.132-.809-1.074-.809-2.049 0-.975.512-1.454.693-1.653.182-.2.396-.25.528-.25l.38.007c.122.006.285-.046.446.34.165.397.561 1.372.611 1.471.049.099.083.215.016.347-.066.132-.099.215-.198.33l-.297.347c-.099.099-.202.206-.087.404.116.198.513.847 1.102 1.372.757.675 1.395.884 1.593.983.198.099.314.083.429-.05.116-.132.495-.578.627-.777s.264-.165.446-.099 1.156.545 1.354.645c.198.099.33.149.38.231.049.085.049.482-.116.945zm3.088-14.762h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-6.967 19.862c-1.327 0-2.634-.333-3.792-.965l-4.203 1.103 1.125-4.108c-.694-1.202-1.059-2.566-1.058-3.964.002-4.372 3.558-7.928 7.928-7.928 2.121.001 4.112.827 5.609 2.325s2.321 3.491 2.32 5.609c-.002 4.372-3.559 7.928-7.929 7.928z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <a :href="twitter" target="_blank" x-show="showtw" class="hover:text-blue-300">
+                            <div class="flex justify-center items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor" viewbox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <a :href="twitter" target="_blank" x-show="showlin" class="hover:text-blue-800">
+                            <div class="flex justify-center items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor" viewbox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <a :href="github" target="_blank" x-show="showgh" class="hover:text-black">
+                            <div class="flex justify-center items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor" viewbox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-4.466 19.59c-.405.078-.534-.171-.534-.384v-2.195c0-.747-.262-1.233-.55-1.481 1.782-.198 3.654-.875 3.654-3.947 0-.874-.312-1.588-.823-2.147.082-.202.356-1.016-.079-2.117 0 0-.671-.215-2.198.82-.64-.18-1.324-.267-2.004-.271-.68.003-1.364.091-2.003.269-1.528-1.035-2.2-.82-2.2-.82-.434 1.102-.16 1.915-.077 2.118-.512.56-.824 1.273-.824 2.147 0 3.064 1.867 3.751 3.645 3.954-.229.2-.436.552-.508 1.07-.457.204-1.614.557-2.328-.666 0 0-.423-.768-1.227-.825 0 0-.78-.01-.055.487 0 0 .525.246.889 1.17 0 0 .463 1.428 2.688.944v1.489c0 .211-.129.459-.528.385-3.18-1.057-5.472-4.056-5.472-7.59 0-4.419 3.582-8 8-8s8 3.581 8 8c0 3.533-2.289 6.531-5.466 7.59z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="font-medium text-lg w-full text-white text-center my-4">
+                        Made with
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline text-red-500 my-4" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"/>
+                        </svg>
+                        by
+                        <a href="https://youaskwebuild.tech">You Ask We Build</a>
+                    </div>
+                </section>
             </section>
-        </section>
-    </div>
-    <script src="bundle.js"></script>
-    <script src="https://unpkg.com/dayjs@1.10.5/dayjs.min.js"></script>
-    <script src="https://unpkg.com/dayjs@1.10.5/plugin/relativeTime.js"></script>
-    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script>
-        function timeAgo(timestamp) {
-            return dayjs.unix(timestamp).fromNow();
-        }
-        function action(url, user, pid) {
-            setTimeout(function () {
-                window.open(url);
-            }, 1000);
-        }
+        </div>
+        <script src="bundle.js"></script>
+        <script src="https://unpkg.com/dayjs@1.10.5/dayjs.min.js"></script>
+        <script src="https://unpkg.com/dayjs@1.10.5/plugin/relativeTime.js"></script>
+        <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <script>
+            function timeAgo(timestamp) {
+                return dayjs.unix(timestamp).fromNow();
+            }
+            function action(url, user, pid) {
+                setTimeout(function () {
+                    window.open(url);
+                }, 1000);
+            }
 
-        function getData() {
-            return {
-                loading: true,
-                user: uuidv4(),
-                logo: "https://via.placeholder.com/150",
-                title: "",
-                description: "",
-                facebook: "",
-                showfb: "",
-                discord: "",
-                showds: "",
-                twitter: "",
-                showtw: "",
-                linkedin: "",
-                showlin: "",
-                instagram: "",
-                showin: "",
-                whatsapp: "",
-                showwa: "",
-                youtube: "",
-                showyt: "",
-                github: "",
-                showgh: "",
-                search: "",
-                category: "",
-                views: "0",
-                showmd: false,
-                links: [],
-                selected: null,
-                showldjson: false,
-                loadContent: "{}",
-                activeTab: 0,
-                clear() {
-                    this.loading = true;
-                    this.user = uuidv4();
-                    this.logo = "https://via.placeholder.com/150";
-                    this.title = "";
-                    this.description = "";
-                    this.facebook = "";
-                    this.showfb = "";
-                    this.discord = "";
-                    this.showds = "";
-                    this.twitter = "";
-                    this.showtw = "";
-                    this.linkedin = "";
-                    this.showlin = "";
-                    this.instagram = "";
-                    this.showin = "";
-                    this.whatsapp = "";
-                    this.showwa = "";
-                    this.youtube = "";
-                    this.showyt = "";
-                    this.github = "";
-                    this.showgh = "";
-                    this.search = "";
-                    this.category = "";
-                    this.views = "0";
-                    this.showmd = false;
-                    this.links = [];
-                    this.selected = null;
-                    this.showldjson = false;
-                    this.loadContent = "{}";
-                    this.activeTab = 0;
-                },
-                loadJSON() {
-                    var data = JSON.parse(this.loadContent);
-                    this.user = data["user"] ? data["user"] : "";
-                    this.logo = data["logo"] ? data["logo"] : "";
-                    this.title = data["title"] ? data["title"] : "";
-                    this.description = data["description"] ? data["description"] : "";
-                    var social = data["social"] ? data["social"] : "";
-                    this.facebook = social["facebook"] ? social["facebook"] : "";
-                    this.showfb = social["showfb"] ? social["showfb"] : "";
-                    this.discord = social["discord"] ? social["discord"] : "";
-                    this.showds = social["showds"] ? social["showds"] : "";
-                    this.twitter = social["twitter"] ? social["twitter"] : "";
-                    this.showtw = social["showtw"] ? social["showtw"] : "";
-                    this.linkedin = social["linkedin"] ? social["linkedin"] : "";
-                    this.showlin = social["showlin"] ? social["showlin"] : "";
-                    this.instagram = social["instagram"] ? social["instagram"] : "";
-                    this.showin = social["showin"] ? social["showin"] : "";
-                    this.whatsapp = social["whatsapp"] ? social["whatsapp"] : "";
-                    this.showwa = social["showwa"] ? social["showwa"] : "";
-                    this.youtube = social["youtube"] ? social["youtube"] : "";
-                    this.showyt = social["showyt"] ? social["showyt"] : "";
-                    this.github = social["github"] ? social["github"] : "";
-                    this.showgh = social["showgh"] ? social["showgh"] : "";
-                    this.search = "";
-                    this.category = "";
-                    this.views = "";
-                    this.showmd = false;
-                    this.links = data["links"] ? data["links"] : "";
-                    this.showldjson = false;
-                    this.save();
-                    window.location.reload();
-                },
-                loadFromStorage() {
-                    if (localStorage.getItem("mylinxbuild")) {
-                        this.load();
-                    }
-                    var self = this;
-                    setInterval(function () {
-                        self.save();
-                    }, 5000);
-                },
-                copy() {
-                    if (localStorage.getItem("mylinxbuild")) {
-                        this.load();
+            function getData() {
+                return {
+                    loading: true,
+                    user: uuidv4(),
+                    logo: "https://via.placeholder.com/150",
+                    title: "",
+                    description: "",
+                    facebook: "",
+                    showfb: "",
+                    discord: "",
+                    showds: "",
+                    twitter: "",
+                    showtw: "",
+                    linkedin: "",
+                    showlin: "",
+                    instagram: "",
+                    showin: "",
+                    whatsapp: "",
+                    showwa: "",
+                    youtube: "",
+                    showyt: "",
+                    github: "",
+                    showgh: "",
+                    search: "",
+                    category: "",
+                    views: "0",
+                    showmd: false,
+                    links: [],
+                    selected: null,
+                    notificationContent:"",
+                    isNotificationShow: false,
+                    showldjson: false,
+                    loadContent: "{}",
+                    activeTab: 0,
+                    clear() {
+                        this.loading = true;
+                        this.user = uuidv4();
+                        this.logo = "https://via.placeholder.com/150";
+                        this.title = "";
+                        this.description = "";
+                        this.facebook = "";
+                        this.showfb = "";
+                        this.discord = "";
+                        this.showds = "";
+                        this.twitter = "";
+                        this.showtw = "";
+                        this.linkedin = "";
+                        this.showlin = "";
+                        this.instagram = "";
+                        this.showin = "";
+                        this.whatsapp = "";
+                        this.showwa = "";
+                        this.youtube = "";
+                        this.showyt = "";
+                        this.github = "";
+                        this.showgh = "";
+                        this.search = "";
+                        this.category = "";
+                        this.views = "0";
+                        this.showmd = false;
+                        this.links = [];
+                        this.selected = null;
+                        this.showldjson = false;
+                        this.loadContent = "{}";
+                        this.activeTab = 0;
+                        this.notificationContent = "All the values are cleared to default values.";
+                        this.isNotificationShow = true;
+                        var self = this;
+                        setTimeout(function () {
+                            self.isNotificationShow = false;
+                        }, 3000);
+                    },
+                    loadJSON() {
+                        var data = JSON.parse(this.loadContent);
+                        this.user = data["user"] ? data["user"] : "";
+                        this.logo = data["logo"] ? data["logo"] : "";
+                        this.title = data["title"] ? data["title"] : "";
+                        this.description = data["description"] ? data["description"] : "";
+                        var social = data["social"] ? data["social"] : "";
+                        this.facebook = social["facebook"] ? social["facebook"] : "";
+                        this.showfb = social["showfb"] ? social["showfb"] : "";
+                        this.discord = social["discord"] ? social["discord"] : "";
+                        this.showds = social["showds"] ? social["showds"] : "";
+                        this.twitter = social["twitter"] ? social["twitter"] : "";
+                        this.showtw = social["showtw"] ? social["showtw"] : "";
+                        this.linkedin = social["linkedin"] ? social["linkedin"] : "";
+                        this.showlin = social["showlin"] ? social["showlin"] : "";
+                        this.instagram = social["instagram"] ? social["instagram"] : "";
+                        this.showin = social["showin"] ? social["showin"] : "";
+                        this.whatsapp = social["whatsapp"] ? social["whatsapp"] : "";
+                        this.showwa = social["showwa"] ? social["showwa"] : "";
+                        this.youtube = social["youtube"] ? social["youtube"] : "";
+                        this.showyt = social["showyt"] ? social["showyt"] : "";
+                        this.github = social["github"] ? social["github"] : "";
+                        this.showgh = social["showgh"] ? social["showgh"] : "";
+                        this.search = "";
+                        this.category = "";
+                        this.views = "";
+                        this.showmd = false;
+                        this.links = data["links"] ? data["links"] : "";
+                        this.showldjson = false;
+                        this.save(true);
+                        this.notificationContent = "Loading the data.json content you uploaded.";
+                        this.isNotificationShow = true;
+                        var self = this;
+                        setTimeout(function () {
+                            self.isNotificationShow = false;
+                        }, 3000);
+                        window.location.reload();
+                    },
+                    loadFromStorage() {
+                        if (localStorage.getItem("mylinxbuild")) {
+                            this.load();
+                        }
+                        var self = this;
+                        setInterval(function () {
+                            self.save(true);
+                        }, 5000);
+                    },
+                    copy() {
+                        if (localStorage.getItem("mylinxbuild")) {
+                            this.load();
+                            var data = {};
+                            data["user"] = this.user;
+                            data["logo"] = this.logo;
+                            data["title"] = this.title;
+                            data["description"] = this.description;
+                            var social = {};
+                            social["facebook"] = this.facebook;
+                            social["showfb"] = this.showfb;
+                            social["discord"] = this.discord;
+                            social["showds"] = this.showds;
+                            social["twitter"] = this.twitter;
+                            social["showtw"] = this.showtw;
+                            social["linkedin"] = this.linkedin;
+                            social["showlin"] = this.showlin;
+                            social["instagram"] = this.instagram;
+                            social["showin"] = this.showin;
+                            social["whatsapp"] = this.whatsapp;
+                            social["showwa"] = this.showwa;
+                            social["youtube"] = this.youtube;
+                            social["showyt"] = this.showyt;
+                            social["github"] = this.github;
+                            social["showgh"] = this.showgh;
+                            data["social"] = social;
+                            data["search"] = "";
+                            data["category"] = "";
+                            data["views"] = 0;
+                            data["showmd"] = false;
+                            data["links"] = this.links;
+
+                            var x = document.createElement("input");
+                            x.type = "text";
+                            x.value = JSON.stringify(data);
+                            x.style.position = "fixed";
+                            x.style.top = "-10000px";
+                            x.style.left = "-10000px";
+
+                            document.body.appendChild(x);
+                            x.select();
+                            document.execCommand("copy");
+                            document.body.removeChild(x);
+
+                            this.notificationContent = "Your data.json is copied to your clipboard now.";
+                            this.isNotificationShow = true;
+                            var self = this;
+                            setTimeout(function () {
+                                self.isNotificationShow = false;
+                            }, 3000);
+                        }
+                    },
+                    save(auto) {
                         var data = {};
                         data["user"] = this.user;
                         data["logo"] = this.logo;
@@ -614,157 +541,100 @@
                         data["views"] = 0;
                         data["showmd"] = false;
                         data["links"] = this.links;
-
-                        var x = document.createElement("input");
-                        x.type = "text";
-                        x.value = JSON.stringify(data);
-                        x.style.position = "fixed";
-                        x.style.top = "-10000px";
-                        x.style.left = "-10000px";
-
-                        document.body.appendChild(x);
-                        x.select();
-                        document.execCommand("copy");
-                        document.body.removeChild(x);
-                    }
-                },
-                save() {
-                    var data = {};
-                    data["user"] = this.user;
-                    data["logo"] = this.logo;
-                    data["title"] = this.title;
-                    data["description"] = this.description;
-                    var social = {};
-                    social["facebook"] = this.facebook;
-                    social["showfb"] = this.showfb;
-                    social["discord"] = this.discord;
-                    social["showds"] = this.showds;
-                    social["twitter"] = this.twitter;
-                    social["showtw"] = this.showtw;
-                    social["linkedin"] = this.linkedin;
-                    social["showlin"] = this.showlin;
-                    social["instagram"] = this.instagram;
-                    social["showin"] = this.showin;
-                    social["whatsapp"] = this.whatsapp;
-                    social["showwa"] = this.showwa;
-                    social["youtube"] = this.youtube;
-                    social["showyt"] = this.showyt;
-                    social["github"] = this.github;
-                    social["showgh"] = this.showgh;
-                    data["social"] = social;
-                    data["search"] = "";
-                    data["category"] = "";
-                    data["views"] = 0;
-                    data["showmd"] = false;
-                    data["links"] = this.links;
-                    window.localStorage.setItem("mylinxbuild", JSON.stringify(data));
-                },
-                load() {
-                    var data = JSON.parse(window.localStorage.getItem("mylinxbuild"));
-                    this.user = data["user"];
-                    this.logo = data["logo"];
-                    this.title = data["title"];
-                    this.description = data["description"];
-                    var social = data["social"];
-                    this.facebook = social["facebook"];
-                    this.showfb = social["showfb"];
-                    this.discord = social["discord"];
-                    this.showds = social["showds"];
-                    this.twitter = social["twitter"];
-                    this.showtw = social["showtw"];
-                    this.linkedin = social["linkedin"];
-                    this.showlin = social["showlin"];
-                    this.instagram = social["instagram"];
-                    this.showin = social["showin"];
-                    this.whatsapp = social["whatsapp"];
-                    this.showwa = social["showwa"];
-                    this.youtube = social["youtube"];
-                    this.showyt = social["showyt"];
-                    this.github = social["github"];
-                    this.showgh = social["showgh"];
-                    this.search = "";
-                    this.category = "";
-                    this.views = 0;
-                    this.showmd = false;
-                    this.links = data["links"];
-                },
-
-                addLink() {
-                    this.links.push({
-                        id: uuidv4(),
-                        category: "",
-                        title: "",
-                        description: "",
-                        time: Math.floor(Date.now() / 1000),
-                        url: "",
-                        image:
-                            "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png",
-                    });
-                    this.selected = this.links.length - 1;
-                },
-                deleteLink(index) {
-                    this.links.splice(index, 1);
-                },
-                get listCategories() {
-                    var categories = [];
-                    this.links.forEach((element) => {
-                        if (!categories.includes(element.category)) {
-                            categories.push(element.category);
+                        window.localStorage.setItem("mylinxbuild", JSON.stringify(data));
+                        if (!auto) {
+                            this.notificationContent = "Your data is saved.";
+                            this.isNotificationShow = true;
+                            var self = this;
+                            setTimeout(function () {
+                                self.isNotificationShow = false;
+                            }, 3000);
                         }
-                    });
-                    return categories;
-                },
-                get filteredlinks() {
-                    var display = [];
-                    if (this.search === "" && this.category === "") {
-                        return this.links;
-                    } else if (this.search !== "" && this.category === "") {
+                    },
+                    load() {
+                        var data = JSON.parse(window.localStorage.getItem("mylinxbuild"));
+                        this.user = data["user"];
+                        this.logo = data["logo"];
+                        this.title = data["title"];
+                        this.description = data["description"];
+                        var social = data["social"];
+                        this.facebook = social["facebook"];
+                        this.showfb = social["showfb"];
+                        this.discord = social["discord"];
+                        this.showds = social["showds"];
+                        this.twitter = social["twitter"];
+                        this.showtw = social["showtw"];
+                        this.linkedin = social["linkedin"];
+                        this.showlin = social["showlin"];
+                        this.instagram = social["instagram"];
+                        this.showin = social["showin"];
+                        this.whatsapp = social["whatsapp"];
+                        this.showwa = social["showwa"];
+                        this.youtube = social["youtube"];
+                        this.showyt = social["showyt"];
+                        this.github = social["github"];
+                        this.showgh = social["showgh"];
+                        this.search = "";
+                        this.category = "";
+                        this.views = 0;
+                        this.showmd = false;
+                        this.links = data["links"];
+                    },
+
+                    addLink() {
+                        this.links.push({
+                            id: uuidv4(),
+                            category: "",
+                            title: "",
+                            description: "",
+                            time: Math.floor(Date.now() / 1000),
+                            url: "",
+                            image: "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+                        });
+                        this.selected = this.links.length - 1;
+                    },
+                    deleteLink(index) {
+                        this.links.splice(index, 1);
+                    },
+                    get listCategories() {
+                        var categories = [];
                         this.links.forEach((element) => {
-                            if (
-                                element.title
-                                    .toLowerCase()
-                                    .includes(this.search.toLowerCase()) ||
-                                element.category
-                                    .toLowerCase()
-                                    .includes(this.search.toLowerCase())
-                            ) {
-                                display.push(element);
+                            if (! categories.includes(element.category)) {
+                                categories.push(element.category);
                             }
                         });
-                        return display;
-                    } else if (this.search === "" && this.category !== "") {
-                        this.links.forEach((element) => {
-                            if (
-                                element.category
-                                    .toLowerCase()
-                                    .includes(this.category.toLowerCase())
-                            ) {
-                                display.push(element);
-                            }
-                        });
-                        return display;
-                    } else {
-                        this.links.forEach((element) => {
-                            if (
-                                element.category
-                                    .toLowerCase()
-                                    .includes(this.category.toLowerCase()) &&
-                                (element.title
-                                    .toLowerCase()
-                                    .includes(this.search.toLowerCase()) ||
-                                    element.category
-                                        .toLowerCase()
-                                        .includes(this.search.toLowerCase()))
-                            ) {
-                                display.push(element);
-                            }
-                        });
-                        return display;
+                        return categories;
+                    },
+                    get filteredlinks() {
+                        var display = [];
+                        if (this.search === "" && this.category === "") {
+                            return this.links;
+                        } else if (this.search !== "" && this.category === "") {
+                            this.links.forEach((element) => {
+                                if (element.title.toLowerCase().includes(this.search.toLowerCase()) || element.category.toLowerCase().includes(this.search.toLowerCase())) {
+                                    display.push(element);
+                                }
+                            });
+                            return display;
+                        } else if (this.search === "" && this.category !== "") {
+                            this.links.forEach((element) => {
+                                if (element.category.toLowerCase().includes(this.category.toLowerCase())) {
+                                    display.push(element);
+                                }
+                            });
+                            return display;
+                        } else {
+                            this.links.forEach((element) => {
+                                if (element.category.toLowerCase().includes(this.category.toLowerCase()) && (element.title.toLowerCase().includes(this.search.toLowerCase()) || element.category.toLowerCase().includes(this.search.toLowerCase()))) {
+                                    display.push(element);
+                                }
+                            });
+                            return display;
+                        }
                     }
-                },
-            };
-        }
-    </script>
-</body>
+                };
+            }
+        </script>
+    </body>
 
 </html>
