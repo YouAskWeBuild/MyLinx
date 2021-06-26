@@ -23,7 +23,7 @@ deploy:
   # Incremental commit to keep old build/files from previous deployments
   keep-history: true
   # Git branch on which it should deploy (master, gh-pages, foo...)
-  target_branch: gh-pages
+  target_branch: mylinx-release
   # overwrite exisitng files
   overwrite: true
   on:
