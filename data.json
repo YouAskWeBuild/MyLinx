@@ -25,7 +25,47 @@
 	"category": "",
 	"views": 0,
 	"showmd": false,
-	"links": [{
+	"links": [ {
+		"id": "9379ddcc-85f9-4dc5-83d4-3bff7cfa2260",
+		"category": "Java",
+		"title": "Design Patterns",
+		"description": "",
+		"time": 1625308402,
+		"url": "https://github.com/iluwatar/java-design-patterns",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "81608f23-355e-4259-be51-99d7cdd56fac",
+		"category": "Java",
+		"title": "Algorithms",
+		"description": "",
+		"time": 1625308435,
+		"url": "https://github.com/TheAlgorithms/Java",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "94293068-9589-4c97-abc0-a9f23961c6c7",
+		"category": "Java",
+		"title": "Interviews",
+		"description": "",
+		"time": 1625308457,
+		"url": "https://github.com/kdn251/interviews",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "9543b4cd-0b49-4b8f-a2a7-b33ac47c862e",
+		"category": "Java",
+		"title": "Java 8 Tutorial",
+		"description": "",
+		"time": 1625308480,
+		"url": "https://github.com/winterbe/java8-tutorial",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
+		"id": "0af6af83-5eb3-4851-82c1-0e1bc7f63285",
+		"category": "Java",
+		"title": "Awesome Java",
+		"description": "",
+		"time": 1625308498,
+		"url": "https://github.com/akullpp/awesome-java",
+		"image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+	}, {
 		"id": "20f70893-3df2-4170-afe4-9c37f3642e89",
 		"category": "Bio Links",
 		"title": "MyLinx",
