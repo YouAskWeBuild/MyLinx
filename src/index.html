@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" x-data="getData()" x-init="load()">
 
 <head>
     <meta charset="utf-8" />
@@ -17,9 +17,9 @@
     </style>
 </head>
 
-<body class="w-full h-full overflow-scroll font-sans bg-no-repeat bg-gradient-to-b from-red-300 to-pink-300"
-    x-data="getData()" x-init="load()">
-    <div class="fixed top-0 left-0 z-50 block w-full h-full bg-no-repeat bg-gradient-to-b from-red-300 to-pink-300"
+<body class="w-full h-full overflow-scroll font-sans bg-no-repeat bg-gradient-to-b" :class="background.code"
+    >
+    <div class="fixed top-0 left-0 z-50 block w-full h-full bg-no-repeat bg-gradient-to-b  from-red-300 to-pink-300" 
         :class="!loading ? 'hidden':'flex items-center justify-center'">
         <span class="text-green-500">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 text-white animate-spin" fill="currentColor"
@@ -68,10 +68,10 @@
             <div class="w-2/6 my-2">
                 <img class="object-contain rounded-full" :src="`${logo}`" alt="logo">
             </div>
-            <div class="w-5/6 my-2 text-2xl font-bold text-center text-white">
+            <div class="w-5/6 my-2 text-2xl font-bold text-center " :class="background.text">
                 <h2 class="break-words " x-text="title"></h2>
             </div>
-            <div class="w-5/6 my-2 text-xl font-semibold text-center text-white ">
+            <div class="w-5/6 my-2 text-xl font-semibold text-center  " :class="background.text">
                 <p class="text-center break-words" x-text="description"></p>
             </div>
 
@@ -118,9 +118,9 @@
         </div>
         <span class="w-4/5 p-2 mt-4 text-sm text-center text-black bg-white rounded-md ">Viewed by : <span
                 x-text="views"></span></span>
-        <span class="w-4/5 mt-4 text-lg text-center text-white">Follow us</span>
+        <span class="w-4/5 mt-4 text-lg text-center " :class="background.text">Follow us</span>
         <div
-            class="grid items-center justify-center w-4/5 grid-flow-row grid-cols-4 grid-rows-2 gap-3 mt-2 mb-1 text-xl text-white">
+            class="grid items-center justify-center w-4/5 grid-flow-row grid-cols-4 grid-rows-2 gap-3 mt-2 mb-1 text-xl " :class="background.text">
 
 
 
@@ -192,7 +192,7 @@
                 </div>
             </a>
         </div>
-        <div class="w-full my-4 text-lg font-medium text-center text-white">
+        <div class="w-full my-4 text-lg font-medium text-center " :class="background.text">
             Made with <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5 my-4 text-red-500"
                 fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -363,6 +363,7 @@
                 logo: "",
                 title: "",
                 description: "",
+                background:{},
                 facebook: "",
                 showfb: "",
                 discord: "",
@@ -394,6 +395,7 @@
                         self.logo = x.logo;
                         self.title = x.title;
                         self.description = x.description;
+                        self.background = x.background;
                         self.facebook = x.social.facebook;
                         self.showfb = (x.social.showfb && x.social.facebook) ? (x.social.facebook !== "") : false;
                         self.discord = x.social.discord;

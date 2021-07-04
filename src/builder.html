@@ -79,6 +79,33 @@
                                 <span class="text-gray-700">Description</span>
                                 <textarea class="form-textarea mt-1 block w-full h-24" rows="3" placeholder="Enter some long form content." x-model="description"></textarea>
                             </label>
+                            <label class="block">
+                                <span class="text-gray-700">Select Background Style</span>
+                                <select class="form-select block w-full mt-1" x-model="background.code">
+                                  <option value="from-red-300 to-pink-300">Default</option>
+                                  <option value="from-warmflamestart-default to-warmflameend-default">Warm Flame</option>
+                                  <option value="from-nightfadestart-default to-nightfadeend-default">Night Fade</option>
+                                  <option value="from-springwarmthstart-default to-springwarmthend-default">Spring Warmth</option>
+                                  <option value="from-nightfadestart-default to-nightfadeend-default">Night Fade</option>
+                                  <option value="from-juicypeachstart-default to-juicypeachend-default">Juicy Peach</option>
+                                  <option value="from-rainyashvillestart-default to-rainyashvilleend-default">Rainy Ville</option>
+                                  <option value="from-frozendreamsstart-default to-frozendreamsend-default">Frozen Dreams</option>
+                                  <option value="from-winternevastart-default to-winternevaend-default">Winter Neva</option>
+                                  <option value="from-amycrispstart-default to-amycrispend-default">Amy Crisp</option>
+                                  <option value="from-ripemalinkastart-default to-ripemalinkaend-default">Ripe Malinka</option>
+                                  <option value="from-truesunsetstart-default to-truesunsetend-default">True Sunset</option>
+                                  <option value="from-nearmoonstart-default to-nearmoonend-default">Near Moon</option>
+                                  <option value="from-happyacidstart-default to-happyacidend-default">Happy Acid</option>
+
+                                </select>
+                              </label>
+                              <label class="block">
+                                <span class="text-gray-700">Select Text Color</span>
+                                <select class="form-select block w-full mt-1" x-model="background.text">
+                                  <option value="text-white">White</option>
+                                  <option value="text-black">Black</option>
+                                </select>
+                              </label>
                         </div>
                         <div x-show="activeTab===1">
                             <div class="grid grid-cols-1 gap-6">
@@ -212,15 +239,15 @@
             </div>
         </div>
         <div class="w-4/12 h-screen overflow-hidden flex items-center justify-center">
-            <section style="height: 750px; width: 450px; border: 16px black solid; border-top-width: 60px; border-bottom-width: 60px; border-radius: 36px;" class=" border-black max-w-screen-sm font-sans overflow-scroll bg-gradient-to-b from-red-300 to-pink-300 bg-no-repeat">
+            <section style="height: 750px; width: 450px; border: 16px black solid; border-top-width: 60px; border-bottom-width: 60px; border-radius: 36px;" class=" border-black max-w-screen-sm font-sans overflow-scroll bg-gradient-to-b  bg-no-repeat" :class="background.code" >
                 <section class="h-full w-full flex flex-col justify-start items-center">
                     <div class="w-2/6 my-2">
                         <img class="rounded-full object-contain" :src="`${logo}`" alt="logo"/>
                     </div>
-                    <div class="w-5/6 text-white text-2xl font-bold my-2 text-center">
+                    <div class="w-5/6  text-2xl font-bold my-2 text-center" :class="background.text">
                         <h2 class="break-words" x-text="title"></h2>
                     </div>
-                    <div class="w-5/6 text-center my-2 text-white text-xl font-semibold">
+                    <div class="w-5/6 text-center my-2  text-xl font-semibold" :class="background.text">
                         <p class="text-center break-words" x-text="description"></p>
                     </div>
                     <div class="grid m-2 gap-y-2 grid-cols-1 w-4/5">
@@ -262,8 +289,8 @@
                     <span class="text-sm text-center w-4/5 text-black bg-white p-2 rounded-md mt-4">Viewed by :
                         <span x-text="views"></span>
                     </span>
-                    <span class="text-lg text-center w-4/5 text-white mt-4">Follow us</span>
-                    <div class="w-4/5 grid grid-flow-row grid-cols-4 grid-rows-2 justify-center items-center text-white text-xl mt-2 mb-1 gap-3">
+                    <span class="text-lg text-center w-4/5  mt-4" :class="background.text">Follow us</span>
+                    <div class="w-4/5 grid grid-flow-row grid-cols-4 grid-rows-2 justify-center items-center text-xl mt-2 mb-1 gap-3" :class="background.text">
                         <a :href="facebook" target="_blank" x-show="showfb" class="hover:text-blue-600">
                             <div class="flex justify-center items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="currentColor" viewbox="0 0 24 24">
@@ -321,7 +348,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="font-medium text-lg w-full text-white text-center my-4">
+                    <div class="font-medium text-lg w-full text-center  my-4" :class="background.text">
                         Made with
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline text-red-500 my-4" fill="currentColor" viewbox="0 0 24 24">
                             <path d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"/>
@@ -354,6 +381,11 @@
                     logo: "https://via.placeholder.com/150",
                     title: "",
                     description: "",
+                    background:{
+                        "text":"text-white",
+                        "type":"gradient",
+                        "code":"default"
+                    },
                     facebook: "",
                     showfb: "",
                     discord: "",
@@ -387,6 +419,11 @@
                         this.logo = "https://via.placeholder.com/150";
                         this.title = "";
                         this.description = "";
+                        this.background={
+                            "text":"text-white",
+                            "type":"gradient",
+                            "code":"default"
+                        };
                         this.facebook = "";
                         this.showfb = "";
                         this.discord = "";
@@ -425,6 +462,7 @@
                         this.logo = data["logo"] ? data["logo"] : "";
                         this.title = data["title"] ? data["title"] : "";
                         this.description = data["description"] ? data["description"] : "";
+                        this.background = data["background"] ? data["background"] :{"text":"text-white","type":"gradient","code":"default"};
                         var social = data["social"] ? data["social"] : "";
                         this.facebook = social["facebook"] ? social["facebook"] : "";
                         this.showfb = social["showfb"] ? social["showfb"] : "";
@@ -474,6 +512,7 @@
                             data["logo"] = this.logo;
                             data["title"] = this.title;
                             data["description"] = this.description;
+                            data["background"] = this.background;
                             var social = {};
                             social["facebook"] = this.facebook;
                             social["showfb"] = this.showfb;
@@ -524,6 +563,7 @@
                         data["logo"] = this.logo;
                         data["title"] = this.title;
                         data["description"] = this.description;
+                        data["background"] = this.background;
                         var social = {};
                         social["facebook"] = this.facebook;
                         social["showfb"] = this.showfb;
@@ -563,6 +603,7 @@
                         this.logo = data["logo"];
                         this.title = data["title"];
                         this.description = data["description"];
+                        this.background = data["background"];
                         var social = data["social"];
                         this.facebook = social["facebook"];
                         this.showfb = social["showfb"];
