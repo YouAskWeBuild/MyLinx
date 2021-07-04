@@ -195,6 +195,10 @@
                                                 <textarea class="form-textarea mt-1 block w-full h-24" rows="3" placeholder="Enter some long form content." x-model="links[index].description"></textarea>
                                             </label>
                                             <label class="block">
+                                                <input class="form-checkbox" type="checkbox"  x-model="links[index].highlight"/>
+                                                <span class="ml-2">Hightlight</span>
+                                            </label>
+                                            <label class="block">
                                                 <span class="text-gray-700">Link URL</span>
                                                 <input type="text" class="form-input mt-1 block w-full" x-model="links[index].url" placeholder="Link URL"/>
                                             </label>
@@ -221,7 +225,8 @@
                     </div>
                     <div class="grid m-2 gap-y-2 grid-cols-1 w-4/5">
                         <template x-for=" item in filteredlinks" :key="item">
-                            <div class="flex flex-col cursor-pointer" @click="action(item.url, user, item.id)">
+                            
+                            <div class="flex flex-col cursor-pointer" :class="{ 'animate-shakex ': item.highlight === true }"  @click="action(item.url, user, item.id)">
                                 <div class="bg-white shadow-md rounded-3xl p-4">
                                     <div class="flex flex-col">
                                         <div class="flex flex-row gap-4">
@@ -245,6 +250,7 @@
                                                     </div>
                                                     <h2 class="flex text-lg font-semibold break-words truncate w-full overflow-hidden" x-text="item.title"></h2>
                                                     <span class="w-full text-sm break-words" x-text="item.description"></span>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -582,7 +588,7 @@
                     },
 
                     addLink() {
-                        this.links.push({
+                        this.links.unshift({
                             id: uuidv4(),
                             category: "",
                             title: "",
@@ -591,7 +597,7 @@
                             url: "",
                             image: "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
                         });
-                        this.selected = this.links.length - 1;
+                        this.selected = 0;
                     },
                     deleteLink(index) {
                         this.links.splice(index, 1);

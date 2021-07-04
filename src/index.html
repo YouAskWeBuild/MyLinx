@@ -80,7 +80,7 @@
         <div class="grid w-4/5 grid-cols-1 m-2 gap-y-2">
             <template x-for=" item in filteredlinks" :key="item">
 
-                <div class="flex flex-col cursor-pointer" @click="action(item.url, user, item.id)">
+                <div class="flex flex-col cursor-pointer" :class="{ 'animate-shakex ': item.highlight === true }"  @click="action(item.url, user, item.id)">
                     <div class="p-4 bg-white shadow-md rounded-3xl">
                         <div class="flex flex-col">
                             <div class="flex flex-row gap-4">

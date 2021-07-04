@@ -73,6 +73,7 @@ module.exports = {
       ping: "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
       pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       bounce: "bounce 1s infinite",
+      shakex: "shakex 2s infinite",
     },
     backdropBlur: (theme) => theme("blur"),
     backdropBrightness: (theme) => theme("brightness"),
@@ -485,9 +486,20 @@ module.exports = {
           opacity: ".5",
         },
       },
+      shakex: {
+        "10%,30%,50%" : {
+            transform: "translate3d(-10px, 0, 0)"
+        },
+        "20%,40%,60%" : {
+          transform: "translate3d(10px, 0, 0)"
+        },
+        "60%": {
+          transform: "translate3d(0, 0, 0)"
+        }
+      },
       bounce: {
         "0%, 100%": {
-          transform: "translateY(-25%)",
+          transform: "translateY(-10%)",
           animationTimingFunction: "cubic-bezier(0.8,0,1,1)",
         },
         "50%": {
