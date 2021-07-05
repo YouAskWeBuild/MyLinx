@@ -33,6 +33,8 @@ Looking for a demo ?
 - Add unlimited links
 - Search and filter 
 - Add Social media links
+- Customize your background
+- Highlight links
 - MyLinx Builder with live preview
 - Save & Load your data in builder
 
