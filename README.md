@@ -107,6 +107,10 @@ MyLinx is currently extended with the following plugins.
 
 Want to contribute? Great!
 
+[Join our discord server](https://discord.gg/m7GhgH6cdt)
+
+Let us know what feature you want to work on, then proceed. 
+
 Fork the repository [MyLinx](https://github.com/youaskwebuild/MyLinx/fork)
 
 Clone your forked repository
