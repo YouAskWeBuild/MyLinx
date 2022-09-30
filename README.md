@@ -118,9 +118,9 @@ Apache 2.0
 
 **Free Software, Hell Yeah!**
 
-[tailwindcss]: https://github.com/tailwindlabs/tailwindcss
-[tailwind forms]: https://github.com/tailwindlabs/tailwindcss-forms
-[sortable.js]: http://sortablejs.github.io/Sortable/
+[tailwindcss](https://github.com/tailwindlabs/tailwindcss)
+[tailwind forms](https://github.com/tailwindlabs/tailwindcss-forms)
+[sortable.js](http://sortablejs.github.io/Sortable/)
 
 ## Authors
 
