@@ -26,7 +26,7 @@ Looking for a demo ?
 
 [MyLinx Demo](https://youaskwebuild.github.io/MyLinx/)
 
-[MyLinx Builder Demo](https://youaskwebuild.github.io/MyLinx/builder.html)
+[MyLinx Builder Demo](https://deviprakash9908.github.io/MyLinx/builder.html)
 
 ## Features
 
