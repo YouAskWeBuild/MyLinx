@@ -157,27 +157,6 @@
                 />
               </label>
               <label class="block">
-                <span class="text-gray-700">Logo Border</span>
-                <input
-                  type="radio"
-                  id="circle"
-                  name="border"
-                  value="rounded-full object-contain"
-                  x-model="logoborder"
-                  placeholder="Logo border"
-                />
-                <label for="circle">Circle</label>
-                <input
-                  type="radio"
-                  id="roundboxlg"
-                  name="border"
-                  value="rounded-lg object-contain"
-                  x-model="logoborder"
-                  placeholder="Logo border"
-                />
-                <label for="roundboxlg">Rounded Box</label>
-              </label>
-              <label class="block">
                 <span class="text-gray-700">Title</span>
                 <input
                   type="text"
@@ -562,7 +541,7 @@
             class="h-full w-full flex flex-col justify-start items-center"
           >
             <div class="w-2/6 my-2">
-              <img :class="logoborder" :src="`${logo}`" alt="logo" />
+              <img class="rounded-full" :src="`${logo}`" alt="logo" />
             </div>
             <div
               class="w-5/6 text-2xl font-bold my-2 text-center"
@@ -858,7 +837,6 @@
           loading: true,
           user: uuidv4(),
           logo: "https://avatars.githubusercontent.com/u/85255520",
-          logoborder: "rounded-full object-contain",
           title: "Name/Title",
           description: "Description about you/company.",
           background: {
@@ -919,7 +897,6 @@
             this.loading = true;
             this.user = uuidv4();
             this.logo = "https://avatars.githubusercontent.com/u/85255520";
-            this.logoborder = "rounded-full object-contain";
             this.title = "Name/Title";
             this.description = "Description about you/company.";
             this.background = {
@@ -986,7 +963,6 @@
             var data = JSON.parse(this.loadContent);
             this.user = data["user"] ? data["user"] : "";
             this.logo = data["logo"] ? data["logo"] : "";
-            this.logoborder = data["logoborder"] ? data["logoborder"] : "";
             this.title = data["title"] ? data["title"] : "";
             this.description = data["description"] ? data["description"] : "";
             this.background = data["background"]
@@ -1040,7 +1016,6 @@
               var data = {};
               data["user"] = this.user;
               data["logo"] = this.logo;
-              data["logoborder"] = this.logoborder;
               data["title"] = this.title;
               data["description"] = this.description;
               data["background"] = this.background;
@@ -1093,7 +1068,6 @@
             var data = {};
             data["user"] = this.user;
             data["logo"] = this.logo;
-            data["logoborder"] = this.logoborder;
             data["title"] = this.title;
             data["description"] = this.description;
             data["background"] = this.background;
@@ -1134,7 +1108,6 @@
             var data = JSON.parse(window.localStorage.getItem("mylinxbuild"));
             this.user = data["user"];
             this.logo = data["logo"];
-            this.logoborder = data["logoborder"];
             this.title = data["title"];
             this.description = data["description"];
             this.background = data["background"];
