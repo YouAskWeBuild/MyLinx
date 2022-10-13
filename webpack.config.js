@@ -38,7 +38,7 @@ module.exports = {
           from: "*.html",
           context: path.resolve(__dirname, "src"),
           force: true,
-        }
+        },
       ],
     }),
   ],

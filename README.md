@@ -1,6 +1,6 @@
 # MyLinx
-## _A simple bio links tool for ***developers***_
 
+## _A simple bio links tool for ***developers***_
 
 ![Travis (.com)](https://img.shields.io/travis/com/youaskwebuild/MyLinx?style=for-the-badge)
 ![Maintenance](https://img.shields.io/maintenance/yes/2021?style=for-the-badge)
@@ -17,21 +17,18 @@
 ![Website](https://img.shields.io/website?down_message=Offline&style=for-the-badge&up_message=Online&url=https%3A%2F%2Fyouaskwebuild.github.io%2FMyLinx%2F)
 ![Discord](https://img.shields.io/discord/854067244274155540?style=for-the-badge)
 
+MyLinx is an open source tool to create and host your bio links page in github.
 
-
-
-MyLinx is an open source tool to create and host your bio links page in github. 
-
-Looking for a demo ? 
+Looking for a demo ?
 
 [MyLinx Demo](https://youaskwebuild.github.io/MyLinx/)
 
-[MyLinx Builder Demo](https://youaskwebuild.github.io/MyLinx/builder.html)
+[MyLinx Builder Demo](https://deviprakash9908.github.io/MyLinx/builder.html)
 
 ## Features
 
 - Add unlimited links
-- Search and filter 
+- Search and filter
 - Add Social media links
 - Customize your background
 - Highlight links
@@ -46,20 +43,20 @@ MyLinx uses the following open source projects:
 
 And of course [MyLinx](https://github.com/YouAskWeBuild/MyLinx) itself is open source with a Apache 2.0 license on GitHub.
 
-
-## Do you need one like the Demo for yourself ? 
+## Do you need one like the Demo for yourself ?
 
 Here is what you should do
 
 - Fork the repository [MyLinx](https://github.com/youaskwebuild/MyLinx/fork)
 - Go to Settings -> Pages -> Select **gh-pages** branch, **/root** in the next select folder and click on **Save**
 
-   ![Example](./how-to-use.png)
+  ![Example](./how-to-use.png)
+
 - Your own site ([your-github-profile-name].github.io/MyLinx) will be up soon.
 
 - You can either visit ([your-github-profile-name].github.io/MyLinx/builder.html) or visit [MyLinx Builder](https://youaskwebuild.github.io/MyLinx/builder.html) to add your own links to display on Mylinx.
 
-- Once you are done, click on **Copy Data** button on the builder page. This will copy the links data to clipboard. 
+- Once you are done, click on **Copy Data** button on the builder page. This will copy the links data to clipboard.
 
 - Now go to your repository and switch your branch to gh-pages
 
@@ -68,9 +65,6 @@ Here is what you should do
 - That's it! Your website is now ready. You can add the link ([your-github-profile-name].github.io/MyLinx) now to your instragram bio or where ever you want.
 
 - In case you want to add or remove, you can click on **Load Data** button and paste the content of your data.json and begin editing from there.
-
-
-
 
 ## Installation
 
@@ -85,13 +79,14 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 cd MyLinx
 npm install
-npm run start
+npm run start:api
+npm run start:client
 ```
 
 For production environments...
 
 ```sh
-npm install 
+npm install
 npm run build
 ```
 
@@ -99,9 +94,9 @@ npm run build
 
 MyLinx is currently extended with the following plugins.
 
-| Plugin | Usage |
-| ------ | ------ |
-|Tailwind Forms | Forms in MyLinx builder are built using tailwind forms plugin 
+| Plugin         | Usage                                                         |
+| -------------- | ------------------------------------------------------------- |
+| Tailwind Forms | Forms in MyLinx builder are built using tailwind forms plugin |
 
 ## Contribute
 
@@ -109,14 +104,13 @@ Want to contribute? Great!
 
 [Join our discord server](https://discord.gg/m7GhgH6cdt)
 
-Let us know what feature you want to work on, then proceed. 
+Let us know what feature you want to work on, then proceed.
 
 Fork the repository [MyLinx](https://github.com/youaskwebuild/MyLinx/fork)
 
 Clone your forked repository
- 
-Make the changes to your clone and provide a PR! 
 
+Make the changes to your clone and provide a PR!
 
 ## License
 
@@ -124,10 +118,9 @@ Apache 2.0
 
 **Free Software, Hell Yeah!**
 
-
-   [TailwindCSS]: <https://github.com/tailwindlabs/tailwindcss>
-   [Tailwind Forms]: <https://github.com/tailwindlabs/tailwindcss-forms>
-
+[tailwindcss](https://github.com/tailwindlabs/tailwindcss)
+[tailwind forms](https://github.com/tailwindlabs/tailwindcss-forms)
+[sortable.js](http://sortablejs.github.io/Sortable/)
 
 ## Authors
 
