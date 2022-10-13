@@ -1,0 +1,227 @@
+{
+  "data": {
+    "user": "5d32aba7-642a-4aea-9637-9f20713059c0",
+    "logo": "https://avatars.githubusercontent.com/u/85255520",
+    "logoborder": "rounded-full object-contain",
+    "title": "You Ask We Build",
+    "description": "Everything we build will be under open source license, free for anyone.",
+    "background": {
+      "text": "text-white",
+      "gradient": true,
+      "code": "from-nightfadestart-default to-nightfadeend-default"
+    },
+    "social": {
+      "facebook": "https://www.facebook.com/youaskwebuild",
+      "showfb": true,
+      "discord": "https://discord.gg/m7GhgH6cdt",
+      "showds": true,
+      "twitter": "https://www.twitter.com/youaskwebuildit",
+      "showtw": true,
+      "linkedin": "https://instagram.com/you_ask_we_build",
+      "showlin": true,
+      "instagram": "https://instagram.com/you_ask_we_build",
+      "showin": true,
+      "whatsapp": "",
+      "showwa": "",
+      "youtube": "https://www.youtube.com/channel/UCizK-lCnBXEcR29dZhyjNPA",
+      "showyt": true,
+      "github": "https://github.com/youaskwebuild",
+      "showgh": true
+    },
+    "search": "",
+    "category": "",
+    "views": 0,
+    "showmd": false,
+    "links": [
+      {
+        "id": "8e521548-a796-42d0-8e5a-142281fddadb",
+        "category": "Course",
+        "title": "HTML / CSS",
+        "description": "Learn HTML CSS the practical way. Join discord server for the course.",
+        "time": 1626270819,
+        "url": "",
+        "image": "https://www.freeiconspng.com/uploads/free-icon-png-17.png",
+        "highlight": true
+      },
+      {
+        "id": "17cd878e-8622-46dc-a5d3-3244bd47b1f5",
+        "category": "Interviews",
+        "title": "Interview Questions",
+        "description": "",
+        "time": 1625576779,
+        "url": "https://github.com/DopplerHQ/awesome-interview-questions",
+        "image": "https://logo.clearbit.com/githubsatellite.com",
+        "highlight": false
+      },
+      {
+        "id": "73b9cc2b-aec4-4f2a-b4f8-8711a2c1454e",
+        "category": "Interviews",
+        "title": "Tech Interview CheatSheet",
+        "description": "",
+        "time": 1625576807,
+        "url": "https://github.com/TSiege/Tech-Interview-Cheat-Sheet",
+        "image": "https://logo.clearbit.com/githubsatellite.com",
+        "highlight": false
+      },
+      {
+        "id": "27254a93-7ba3-44ee-943c-035871118955",
+        "category": "Interviews",
+        "title": "Algorithms I",
+        "description": "",
+        "time": 1625576748,
+        "url": "https://github.com/keon/algorithms#list-of-implementations",
+        "image": "https://logo.clearbit.com/githubsatellite.com",
+        "highlight": false
+      },
+      {
+        "id": "6dfc6589-e209-4303-b857-b8e6d356c8db",
+        "category": "Interviews",
+        "title": "Algorithms II",
+        "description": "",
+        "time": 1625576701,
+        "url": "https://github.com/prakhar1989/Algorithms",
+        "image": "https://logo.clearbit.com/githubsatellite.com",
+        "highlight": false
+      },
+      {
+        "id": "092132bb-4c99-4e4a-9cac-9ce05fcd69d8",
+        "category": "Research",
+        "title": "Paper Panda",
+        "description": "If you are struck by paywall, you can use this chrome extension to view the research papers",
+        "time": 1625652403,
+        "url": "https://paperpanda.app/welcome",
+        "image": "https://lh3.googleusercontent.com/TuREzXQQswnZD6AiAKCGW-C5SaaISFb30kgnaYEOgtVjK265OyEdBlwmbTRvgvCfnTIlETDZ2HfdhWl45wk-oDnoKOI=w128-h128-e365-rj-sc0x00ffffff",
+        "highlight": false
+      },
+      {
+        "id": "2b06631f-8acb-475b-ac38-d89147576035",
+        "category": "Interviews",
+        "title": "Algo Deck",
+        "description": "",
+        "time": 1625576671,
+        "url": "https://github.com/teivah/algodeck/",
+        "image": "https://logo.clearbit.com/githubsatellite.com",
+        "highlight": false
+      },
+      {
+        "id": "a1ff0aff-630e-4a99-8a9d-a7721ad4b131",
+        "category": "Interviews",
+        "title": "Awesome Algorithms",
+        "description": "",
+        "time": 1625576413,
+        "url": "https://github.com/tayllan/awesome-algorithms",
+        "image": "https://logo.clearbit.com/githubsatellite.com",
+        "highlight": false
+      },
+      {
+        "id": "9379ddcc-85f9-4dc5-83d4-3bff7cfa2260",
+        "category": "Java",
+        "title": "Design Patterns",
+        "description": "",
+        "highlight": false,
+        "time": 1625308402,
+        "url": "https://github.com/iluwatar/java-design-patterns",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "81608f23-355e-4259-be51-99d7cdd56fac",
+        "category": "Java",
+        "title": "Algorithms",
+        "description": "",
+        "time": 1625308435,
+        "url": "https://github.com/TheAlgorithms/Java",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "94293068-9589-4c97-abc0-a9f23961c6c7",
+        "category": "Java",
+        "title": "Interviews",
+        "description": "",
+        "time": 1625308457,
+        "url": "https://github.com/kdn251/interviews",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "9543b4cd-0b49-4b8f-a2a7-b33ac47c862e",
+        "category": "Java",
+        "title": "Java 8 Tutorial",
+        "description": "",
+        "time": 1625308480,
+        "url": "https://github.com/winterbe/java8-tutorial",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "0af6af83-5eb3-4851-82c1-0e1bc7f63285",
+        "category": "Java",
+        "title": "Awesome Java",
+        "description": "",
+        "time": 1625308498,
+        "url": "https://github.com/akullpp/awesome-java",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "20f70893-3df2-4170-afe4-9c37f3642e89",
+        "category": "Bio Links",
+        "title": "MyLinx",
+        "description": "A simple opensource bio links tool for developers",
+        "time": 1624563209,
+        "url": "https://github.com/YouAskWeBuild/MyLinx",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "1624394306",
+        "category": "Domain & Hosting",
+        "title": "Free Domains",
+        "description": "Register domains at zero cost. 100% free.",
+        "time": 1624394306,
+        "url": "https://www.freenom.com/",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "5e1aaf55-1dc8-4e6b-be27-fc93315ce110",
+        "category": "Background Removal",
+        "title": "Remove.bg",
+        "description": "",
+        "time": 1624394945,
+        "url": "https://www.remove.bg/",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "10d303a8-28ac-4df9-89cc-8e8c89ddc7a0",
+        "category": "Background Removal",
+        "title": "Social Book",
+        "description": "",
+        "time": 1624394977,
+        "url": "https://socialbook.io/",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "1bcf9361-3be8-4034-9aa4-8e9e7ea64ff5",
+        "category": "Background Removal",
+        "title": "Pure Photos",
+        "description": "",
+        "time": 1624395016,
+        "url": "https://purephotos.app/",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "e56081f9-4de7-4511-a7bc-3510f2adb452",
+        "category": "Background Removal",
+        "title": "Trace",
+        "description": "",
+        "time": 1624395036,
+        "url": "https://www.stickermule.com/trace/",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      },
+      {
+        "id": "4ae2c027-c0a1-4597-a355-8bf75540a6de",
+        "category": "Github",
+        "title": "Github Profile ",
+        "description": "README Generator",
+        "time": 1624395062,
+        "url": "https://rahuldkjain.github.io/gh-profile-readme-generator/",
+        "image": "https://ik.imagekit.io/youaskwebuild/iconmonstr-star-3-240_P3ejnMp7r.png"
+      }
+    ]
+  }
+}
